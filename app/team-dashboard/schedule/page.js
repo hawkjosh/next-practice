@@ -4,12 +4,12 @@ import Link from 'next/link'
 const formatDate = (dateString) => {
 	const date = new Date(dateString)
 	return date.toLocaleDateString('en-US', {
-		weekday: 'long',
-		year: 'numeric',
-		month: 'long',
+		weekday: 'short',
+		year: '2-digit',
+		month: 'numeric',
 		day: 'numeric',
-		hour: '2-digit',
-		minute: '2-digit',
+		hour: 'numeric',
+		minute: 'numeric',
 	})
 }
 
@@ -38,16 +38,28 @@ export default async function Schedule() {
 			</div>
 			<div>
 				{data ? (
-					<div className='container mx-auto'>
+					<div className='container mx-auto flex flex-col gap-2'>
 						{data.schedule.map((game) => {
-              return (
-							<div key={game.id}>
-								<span>{`Date: ${formatDate(game.date)}, `}</span>
-								<span>{`Opponent: ${game.opponent}, `}</span>
-								<span>{`Location: ${game.location}`}</span>
-								<span>{`Result: ${game.result} (${game.win_score}-${game.lose_score})`}</span>
-							</div>
-						)})}
+							return (
+								<div
+									key={game.id}
+									className='flex flex-col divide-y divide-dashed border-solid border-2 border-sky-500'>
+									<div>
+										<strong>Date:</strong> {formatDate(game.date)}
+									</div>
+									<div>
+										<strong>Opponent:</strong> {game.opponent}
+									</div>
+									<div>
+										<strong>Location:</strong> {game.location}
+									</div>
+									<div>
+										<strong>Result:</strong>{' '}
+										{`${game.result} (${game.win_score}-${game.lose_score})`}
+									</div>
+								</div>
+							)
+						})}
 					</div>
 				) : (
 					<div>Loading...</div>
