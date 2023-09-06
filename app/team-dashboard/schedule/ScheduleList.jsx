@@ -1,31 +1,10 @@
 import Image from 'next/image'
-
-const futureDate = (dateString) => {
-	const date = new Date(dateString)
-	return date.toLocaleDateString('en-US', {
-		weekday: 'short',
-		year: '2-digit',
-		month: 'numeric',
-		day: 'numeric',
-		hour: 'numeric',
-		minute: 'numeric',
-	})
-}
-
-const pastDate = (dateString) => {
-	const date = new Date(dateString)
-	return date.toLocaleDateString('en-US', {
-		weekday: 'short',
-		year: '2-digit',
-		month: 'numeric',
-		day: 'numeric',
-	})
-}
+import { useDateFormat } from '@/app/utils/useDateFormat'
 
 async function getSchedule() {
 	const data = await fetch('http://localhost:4000/schedule', {
 		next: {
-			revalidate: 0,
+			revalidate: 15,
 		},
 	})
 
@@ -40,70 +19,55 @@ export default async function ScheduleList() {
 	const schedule = await getSchedule()
 
 	return (
-		<div>
-			{schedule ? (
-				<div className='container mx-auto flex flex-wrap justify-center gap-5 py-2 max-w-5xl'>
-					{schedule.map((game) => {
-						return (
-							<div
-								key={game.id}
-								className={`card ${
-									game.location === 'Home' ? 'home' : 'away'
-								}`}>
-								{game.result ? (
-									<div className='card-date'>{pastDate(game.date)}</div>
-								) : (
-									<div className='card-date'>{futureDate(game.date)}</div>
-								)}
+		<div className='schedule'>
+			{!schedule && <div>Loading...</div>}
 
-								<div className='card-venue capitalize'>@ {game.venue}</div>
+			{schedule.map((game) => (
+				<div
+					key={game.id}
+					className={`card ${game.location === 'Home' ? 'home' : 'away'}`}>
+					<div className='date'>{useDateFormat(game.date).gameDate}</div>
 
-								{game.location === 'Home' ? (
-									<div className='card-matchup'>
-										<Image
-											src='https://www.mlbstatic.com/team-logos/team-cap-on-light/144.svg'
-											alt='opponent logo'
-											width={30}
-											height={30}
-										/>
-										<span className='text-slate-900'>vs</span>
-										<Image
-											src={game.opponent_logo}
-											alt={`${game.opponent} Logo`}
-											width={30}
-											height={30}
-										/>
-									</div>
-								) : (
-									<div className='card-matchup'>
-										<Image
-											src={game.opponent_logo}
-											alt={`${game.opponent} Logo`}
-											width={30}
-											height={30}
-										/>
-										<span className='text-slate-900'>vs</span>
-										<Image
-											src='https://www.mlbstatic.com/team-logos/team-cap-on-light/144.svg'
-											alt='opponent logo'
-											width={30}
-											height={30}
-										/>
-									</div>
-								)}
+					{!game.result && (
+						<div className='time'>{useDateFormat(game.date).gameStart}</div>
+					)}
 
-								{game.result === 'Win' ? (
-									<div className='pill win'>{`W ${game.win_score}-${game.lose_score}`}</div>
-								) : game.result === 'Loss' ? (
-									<div className='pill loss'>{`L ${game.win_score}-${game.lose_score}`}</div>
-								) : null}
-							</div>
-						)
-					})}
+					<div className='venue'>@ {game.venue}</div>
+
+					<div className='matchup'>
+						<Image
+							src={
+								game.location === 'Home'
+									? 'https://www.mlbstatic.com/team-logos/team-cap-on-light/144.svg'
+									: game.opponent_logo
+							}
+							width={1}
+							height={1}
+							alt='Atlanta Braves Logo'
+							priority
+						/>
+						<span>vs</span>
+						<Image
+							src={
+								game.location === 'Home'
+									? game.opponent_logo
+									: 'https://www.mlbstatic.com/team-logos/team-cap-on-light/144.svg'
+							}
+							width={1}
+							height={1}
+							alt={`${game.opponent} Logo`}
+							priority
+						/>
+					</div>
+
+					{game.result && (
+						<div className={`badge ${game.result === 'Win' ? 'win' : 'loss'}`}>
+							<div className='result'>{game.result === 'Win' ? 'W' : 'L'}</div>
+							<div className='score'>{`${game.win_score}-${game.lose_score}`}</div>
+						</div>
+					)}
 				</div>
-			) : (
-				<div>Loading...</div>
-			)}
+			))}
 		</div>
 	)
 }
