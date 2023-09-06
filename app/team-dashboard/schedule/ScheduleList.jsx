@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Image from 'next/image'
 import { useDateFormat } from '@/app/utils/useDateFormat'
 
@@ -23,7 +24,8 @@ export default async function ScheduleList() {
 			{!schedule && <div>Loading...</div>}
 
 			{schedule.map((game) => (
-				<div
+				<Link
+					href={`http://localhost:4000/schedule/${game.id}`}
 					key={game.id}
 					className={`card ${game.location === 'Home' ? 'home' : 'away'}`}>
 					<div className='date'>{useDateFormat(game.date).gameDate}</div>
@@ -66,7 +68,7 @@ export default async function ScheduleList() {
 							<div className='score'>{`${game.win_score}-${game.lose_score}`}</div>
 						</div>
 					)}
-				</div>
+				</Link>
 			))}
 		</div>
 	)
