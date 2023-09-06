@@ -3,25 +3,83 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+	--foreground-rgb: 0, 0, 0;
+	--background-start-rgb: 214, 219, 220;
+	--background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+	:root {
+		--foreground-rgb: 255, 255, 255;
+		--background-start-rgb: 0, 0, 0;
+		--background-end-rgb: 0, 0, 0;
+	}
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+	color: rgb(var(--foreground-rgb));
+	background: linear-gradient(
+			to bottom,
+			transparent,
+			rgb(var(--background-end-rgb))
+		)
+		rgb(var(--background-start-rgb));
+
+	& h1 {
+		@apply font-bold text-red-600 text-lg;
+	}
+}
+
+/* nav styles */
+nav {
+	@apply pb-4 px-3 border-b-2 border-gray-200 flex items-center gap-5 my-10 mx-auto max-w-5xl;
+
+	& a {
+		@apply text-gray-500;
+
+		&:hover {
+			@apply text-white;
+		}
+	}
+}
+
+/* card styles */
+.card {
+	@apply w-1/5 flex flex-col items-center gap-1 bg-white rounded-lg pt-3 pb-6 relative border border-solid border-slate-400 transition duration-300 cursor-default hover:scale-105 hover:-rotate-6 hover:shadow-2xl;
+
+	&.home {
+		@apply bg-emerald-200;
+	}
+
+	&.away {
+		@apply bg-rose-200;
+	}
+
+	& .card-matchup {
+		@apply flex justify-center items-center gap-3;
+
+		& span {
+			@apply font-bold;
+		}
+	}
+
+	& .card-date {
+		@apply font-bold text-gray-700 text-sm mb-0;
+	}
+
+	& .card-venue {
+		@apply pb-2 text-sm leading-relaxed text-gray-500;
+	}
+
+	& .pill {
+		@apply absolute bottom-0 right-0 rounded-tl-lg rounded-br-md py-0.5 px-1.5 mt-3 inline-block text-xs font-semibold;
+
+		&.win {
+			@apply bg-green-700;
+		}
+
+		&.loss {
+			@apply bg-red-600;
+		}
+	}
 }
