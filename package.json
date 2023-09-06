@@ -4,6 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "concurrently \"next dev -H 192.168.86.59\" \"yarn json-server\"",
+		"dev-work": "concurrently \"next dev -H 192.168.86.27\" \"yarn json-server\"",
 		"json-server": "json-server --watch --port 4000 ./_data/db.json",
 		"build": "next build",
 		"start": "next start"
