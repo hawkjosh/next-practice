@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation'
 export default function Navbar() {
 	const currentRoute = usePathname()
 	const showBackLink =
-		currentRoute !== '/' && currentRoute !== '/team-dashboard'
+		currentRoute !== '/' && currentRoute !== '/team'
 
 	return (
 		<nav>
@@ -26,7 +26,7 @@ export default function Navbar() {
 				</Link>
 				{showBackLink && (
 					<Link
-						href='/team-dashboard'
+						href='/team'
 						className='nav-back'>
 						(Return to Team Dashboard)
 					</Link>

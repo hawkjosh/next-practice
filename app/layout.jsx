@@ -2,7 +2,7 @@ import './globals.css'
 import { Inter, Open_Sans, Rubik } from 'next/font/google'
 
 // Components
-import Navbar from './components/Navbar.jsx'
+import Navbar from './Navbar'
 
 const font = Open_Sans({
 	subsets: ['latin'],

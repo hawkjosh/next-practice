@@ -2,10 +2,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useDateFormat } from '@/app/utils/useDateFormat'
 
+const homeLogo =
+	'https://www.mlbstatic.com/team-logos/team-cap-on-light/144.svg'
+
 async function getSchedule() {
 	const data = await fetch('http://localhost:4000/schedule', {
 		next: {
-			revalidate: 15,
+			revalidate: 0,
 		},
 	})
 
@@ -25,9 +28,9 @@ export default async function ScheduleList() {
 
 			{schedule.map((game) => (
 				<Link
-					href={`http://localhost:4000/schedule/${game.id}`}
+					href={`/team/schedule/${game.id}`}
 					key={game.id}
-					className={`card ${game.location === 'Home' ? 'home' : 'away'}`}>
+					className={`card ${game.location}`}>
 					<div className='date'>{useDateFormat(game.date).gameDate}</div>
 
 					{!game.result && (
@@ -38,33 +41,29 @@ export default async function ScheduleList() {
 
 					<div className='matchup'>
 						<Image
-							src={
-								game.location === 'Home'
-									? 'https://www.mlbstatic.com/team-logos/team-cap-on-light/144.svg'
-									: game.opponent_logo
-							}
+							src={game.location === 'home' ? homeLogo : game.opponent_logo}
 							width={1}
 							height={1}
-							alt='Atlanta Braves Logo'
+							alt={`${
+								game.location === 'home' ? 'Atlanta Braves' : game.opponent
+							} Logo`}
 							priority
 						/>
 						<span>vs</span>
 						<Image
-							src={
-								game.location === 'Home'
-									? game.opponent_logo
-									: 'https://www.mlbstatic.com/team-logos/team-cap-on-light/144.svg'
-							}
+							src={game.location === 'away' ? homeLogo : game.opponent_logo}
 							width={1}
 							height={1}
-							alt={`${game.opponent} Logo`}
+							alt={`${
+								game.location === 'away' ? 'Atlanta Braves' : game.opponent
+							} Logo`}
 							priority
 						/>
 					</div>
 
 					{game.result && (
-						<div className={`badge ${game.result === 'Win' ? 'win' : 'loss'}`}>
-							<div className='result'>{game.result === 'Win' ? 'W' : 'L'}</div>
+						<div className={`badge ${game.result}`}>
+							<div className='result'>{game.result === 'win' ? 'W' : 'L'}</div>
 							<div className='score'>{`${game.win_score}-${game.lose_score}`}</div>
 						</div>
 					)}

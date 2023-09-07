@@ -5,9 +5,9 @@ export default function TeamDashboard() {
 		<main>
 			<div className='page-container'>
 				<div className='page-title'>Team Dashboard</div>
-				<div className='team-dashboard'>
-					<Link href='/team-dashboard/schedule'>Schedule</Link>
-					<Link href='/team-dashboard/roster'>Roster</Link>
+				<div className='team'>
+					<Link href='/team/schedule'>Schedule</Link>
+					<Link href='/team/roster'>Roster</Link>
 				</div>
 			</div>
 		</main>

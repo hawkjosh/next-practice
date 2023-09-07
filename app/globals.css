@@ -35,7 +35,7 @@ body {
 				@apply w-full flex items-center gap-4;
 
 				& img {
-					@apply w-[6.25rem] h-auto;
+					@apply w-[6.25rem] h-[6.25rem];
 				}
 
 				& span {
@@ -76,7 +76,7 @@ body {
 				}
 			}
 
-			& .team-dashboard {
+			& .team {
 				@apply flex justify-center gap-5;
 
 				& a {
@@ -85,6 +85,10 @@ body {
 						@apply text-blue-600;
 					}
 				}
+			}
+
+			& .details-card {
+				@apply flex flex-col items-center gap-4;
 			}
 
 			& .schedule {
@@ -131,7 +135,7 @@ body {
 						&.win {
 							@apply bg-green-700;
 						}
-						&.loss {
+						&.lose {
 							@apply bg-red-600;
 						}
 
