@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export default function TeamDashboard() {
+export default function Team() {
 	return (
 		<main>
 			<div className='page-container'>

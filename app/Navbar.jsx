@@ -6,8 +6,7 @@ import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
 	const currentRoute = usePathname()
-	const showBackLink =
-		currentRoute !== '/' && currentRoute !== '/team'
+	const showBackLink = currentRoute !== '/' && currentRoute !== '/team'
 
 	return (
 		<nav>
