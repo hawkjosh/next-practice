@@ -1,6 +1,6 @@
-async function getAllSchedules() {
-	const res = await fetch(
-		'https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2023&gameType=R',
+async function getTeamSchedule(id) {
+	const response = await fetch(
+		`https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2023&gameType=R&teamId=${id}`,
 		{
 			next: {
 				revalidate: 60,
@@ -8,17 +8,17 @@ async function getAllSchedules() {
 		}
 	)
 
-	if (!res.ok) {
+	if (!response.ok) {
 		throw new Error('Failed to fetch data')
 	}
 
-	const {data: dates} = await res.json()
+	const data = await response.json()
 
-	return dates
+	return data.dates
 }
 
-export default async function AllSchedules() {
-	const schedule = await getAllSchedules()
+export default async function TeamSchedule({params}) {
+	const schedule = await getTeamSchedule()
 
 	return (
 		<div className='schedule'>

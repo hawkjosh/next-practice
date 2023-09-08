@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export default function Team() {
+export default function TeamPage() {
 	return (
 		<main>
 			<div className='page-container'>

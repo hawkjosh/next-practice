@@ -4,15 +4,9 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: 'https',
-				hostname: 'a.espncdn.com',
+				hostname: 'mlbstatic.com',
 				port: '',
-				pathname: '/i/headshots/mlb/players/full/**',
-			},
-			{
-				protocol: 'https',
-				hostname: 'img.mlbstatic.com',
-				port: '',
-				pathname: '/mlb-photos/image/upload/**',
+				pathname: '/team-logos/team-cap-on-light/**',
 			},
 		],
 	},
