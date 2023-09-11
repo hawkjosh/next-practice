@@ -1,17 +1,19 @@
-### Directory Structure for next-mlb App
+### App Directory Structure
 
 - .next
 - app
-  - components
-    - Navbar.jsx
-  - teams
   - [teamId]
     - roster
+      - [playerId]
+        - page.jsx
       - page.jsx
     - schedule
+      - [gameId]
+        - page.jsx
       - page.jsx
     - page.jsx
-  - page.jsx
+  - components
+    - Navbar.jsx
   - globals.css
   - layout.jsx
   - page.jsx
@@ -22,6 +24,8 @@
 - utils
   - request.rest
   - useBuildUrl.js
+  - useDateFormat.js
+  - useMediaUrl.js
 - .gitignore
 - jsconfig.json
 - next.config.js

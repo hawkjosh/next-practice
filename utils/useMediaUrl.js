@@ -1,5 +1,27 @@
-export function logoUrl(id) {
+// Team Cap on Light
+export function logoUrlCapLt(id) {
 	const url = 'https://www.mlbstatic.com/team-logos/team-cap-on-light'
+
+	return `${url}/${id}.svg`
+}
+
+// Team Cap on Dark
+export function logoUrlCapDrk(id) {
+	const url = 'https://www.mlbstatic.com/team-logos/team-cap-on-dark'
+
+	return `${url}/${id}.svg`
+}
+
+// Team Primary on Light
+export function logoUrlPrimLt(id) {
+	const url = 'https://www.mlbstatic.com/team-logos/team-primary-on-light'
+
+	return `${url}/${id}.svg`
+}
+
+// Team Primary on Dark
+export function logoUrlPrimDrk(id) {
+	const url = 'https://www.mlbstatic.com/team-logos/team-primary-on-dark'
 
 	return `${url}/${id}.svg`
 }

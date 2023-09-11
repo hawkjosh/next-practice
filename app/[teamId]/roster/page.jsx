@@ -12,7 +12,7 @@ export default async function TeamRoster({ params }) {
 				{roster.map((player) => (
 					<Link
 						key={player.person.id}
-						href={`/teams/${params.teamId}/roster/${player.person.id}`}
+						href={`/${params.teamId}/roster/${player.person.id}`}
 						className='flex divide-x py-2 items-center'>
 						<div className='flex px-2'>
 							Player Name: {player.person.fullName}

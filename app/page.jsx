@@ -1,11 +1,29 @@
 import Link from 'next/link'
+import Image from 'next/image'
+import { getAllTeams } from '@/lib/getMlbData'
+import * as logo from '@/utils/useMediaUrl'
 
-export default function HomePage() {
+export default async function HomePage() {
+	const teams = await getAllTeams()
 	return (
 		<main>
 			<div className='page-container'>
-				<div className='page-title'>My MLB HQ</div>
-				<Link href='/teams'>Teams</Link>
+				<div className='home'>
+					{teams.map((team) => (
+						<Link
+							key={team.id}
+							href={`/${team.id}`}
+							className='team-choice'>
+							<Image
+								src={logo.logoUrlCapLt(team.id)}
+								width={1}
+								height={1}
+								alt={`${team.clubName} Logo`}
+							/>
+							<div>{team.clubName}</div>
+						</Link>
+					))}
+				</div>
 			</div>
 		</main>
 	)

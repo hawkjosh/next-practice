@@ -34,7 +34,7 @@ export default async function TeamSchedule({ params }) {
 				date.games.map((game) => (
 					<Link
 						key={game.gamePk}
-						href={`/teams/${params.teamId}/schedule/${game.gamePk}`}
+						href={`/${params.teamId}/schedule/${game.gamePk}`}
 						className={`card`}>
 						<div className='date'>{game.officialDate}</div>
 
