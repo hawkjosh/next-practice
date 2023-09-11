@@ -13,14 +13,14 @@ export default async function HomePage() {
 						<Link
 							key={team.id}
 							href={`/${team.id}`}
-							className='team-choice'>
+							className='team-link'>
 							<Image
 								src={logo.logoUrlCapLt(team.id)}
 								width={1}
 								height={1}
 								alt={`${team.clubName} Logo`}
 							/>
-							<div>{team.clubName}</div>
+							<div className='team-tooltip'>{team.clubName}</div>
 						</Link>
 					))}
 				</div>

@@ -26,7 +26,7 @@ body {
 		rgb(var(--background-start-rgb));
 
 	& nav {
-		@apply border-b-2 border-gray-200 mb-10 bg-blue-500 sticky top-0;
+		@apply border-b-2 border-gray-200 mb-10 bg-blue-500 sticky top-0 z-10;
 
 		& .nav-container {
 			@apply w-full py-4 px-3 flex items-center justify-start gap-7 mx-auto max-w-7xl;
@@ -56,7 +56,7 @@ body {
 	}
 
 	& main {
-		@apply container mx-auto max-w-screen-xl;
+		@apply container mx-auto max-w-screen-xl z-0;
 
 		& .page-container {
 			@apply @container mx-auto flex flex-col gap-5;
@@ -68,14 +68,22 @@ body {
 			& .home {
 				@apply grid grid-flow-row grid-cols-6 place-items-center gap-5;
 
-				& .team-choice {
-					@apply flex flex-col items-center gap-2 transition transform duration-300 bg-slate-600 rounded-[50%] w-3/4 aspect-square p-6;
+				& .team-link {
+					@apply flex flex-col items-center justify-center gap-2 transition transform duration-300 bg-slate-600 rounded-[50%] w-3/4 aspect-square p-2 relative;
 					&:hover {
-						@apply scale-110 text-blue-500;
+						@apply scale-125;
+
+						& .team-tooltip {
+							@apply block;
+						}
 					}
 
 					& img {
 						@apply w-20 h-20;
+					}
+
+					& .team-tooltip {
+						@apply hidden absolute top-0 left-1/2 translate-x-[-50%];
 					}
 				}
 			}
