@@ -1,10 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import getTeam from '@/lib/getTeam.js'
+import { getTeam } from '@/lib/getMlbData'
+import { logoUrl } from '@/utils/useMediaUrl'
 
-const logoUrl = 'https://www.mlbstatic.com/team-logos/team-cap-on-light'
-
-export default async function TeamPage({ params }) {
+export default async function TeamDashboardPage({ params }) {
 	const teams = await getTeam(params.teamId)
 	const team = teams[0]
 	return (
@@ -12,7 +11,7 @@ export default async function TeamPage({ params }) {
 			<div className='page-container'>
 				<div className='page-title'>{team.name} Dashboard</div>
 				<Image
-					src={`${logoUrl}/${team.id}.svg`}
+					src={logoUrl(team.id)}
 					width={50}
 					height={50}
 					alt={`${team.teamName} Logo`}

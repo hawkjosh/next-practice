@@ -1,15 +1,20 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+
+module.exports = {
 	images: {
 		remotePatterns: [
 			{
 				protocol: 'https',
 				hostname: 'mlbstatic.com',
 				port: '',
-				pathname: '/team-logos/team-cap-on-light/**',
+				pathname: '/team-logos/**',
+			},
+			{
+				protocol: 'https',
+				hostname: 'img.mlbstatic.com',
+				port: '',
+				pathname: '/mlb-photos/**',
 			},
 		],
 	},
 }
-
-module.exports = nextConfig
