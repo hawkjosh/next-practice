@@ -1,24 +1,7 @@
-async function getRoster() {
-	const response = await fetch(
-		'https://statsapi.mlb.com/api/v1/teams/144/roster',
-		{
-			next: {
-				revalidate: 0,
-			},
-		}
-	)
+import getRoster from "@/lib/getTeamRoster"
 
-	if (!response.ok) {
-		throw new Error('Failed to fetch data')
-	}
-
-	const data = await response.json()
-
-	return data.roster
-}
-
-export default async function RosterList() {
-	const roster = await getRoster()
+export default async function TeamRoster({params}) {
+	const roster = await getRoster(params.teamId)
 
 	return (
 		<div>

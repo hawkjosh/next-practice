@@ -1,30 +1,10 @@
-async function getAllSchedules() {
-	const res = await fetch(
-		'https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2023&gameType=R',
-		{
-			next: {
-				revalidate: 60,
-			},
-		}
-	)
+import getTeamSchedule from '@/lib/getTeamSchedule'
 
-	if (!res.ok) {
-		throw new Error('Failed to fetch data')
-	}
-
-	const {data: dates} = await res.json()
-
-	return dates
-}
-
-export default async function AllSchedules() {
-	const schedule = await getAllSchedules()
-
+export default async function TeamSchedule({ params }) {
+	const dates = await getTeamSchedule(params.teamId)
 	return (
 		<div className='schedule'>
-			{!schedule && <div>Loading...</div>}
-
-			{schedule.map((date) =>
+			{dates.map((date) =>
 				date.games.map((game) => (
 					<div
 						key={game.gamePk}

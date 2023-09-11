@@ -11,3 +11,8 @@ Get https://statsapi.mlb.com/api/v1/schedule?sportId=1&teamId=144&season=2023&ga
 
 # ::: 
 GET https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2023&gameType=R
+
+###
+
+# ::: 
+GET https://statsapi.mlb.com/api/v1/teams/144
