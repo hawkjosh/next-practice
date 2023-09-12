@@ -1,23 +1,89 @@
-# ::: MLB STATS API {https://statsapi.mlb.com/api/v1/<endpoint>?<query_params>}
-# get all MLB teams example → https://statsapi.mlb.com/api/v1/teams?sportId=1
+# MLB STATS API REQUESTS
+
+# BASE_URL = https://statsapi.mlb.com/api/v1/
+
+# PIN -> Use: <BASE_URL><endpoint><path_params><query_params>
+
+# NOTES -> GET All MLB Teams
+# endpoint      ->  teams
+# path_params   ->  n/a
+# query_params  ->  ?sportId=1
+#  ↓ ↓ ↓ EXAMPLE ↓ ↓ ↓
 GET https://statsapi.mlb.com/api/v1/teams?sportId=1
 
-###
-
-# ::: 
-Get https://statsapi.mlb.com/api/v1/schedule?sportId=1&teamId=144&season=2023&gameType=R
 
 ###
 
-# ::: 
-GET https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2023&gameType=R
+
+# NOTES -> GET Single MLB Team Info
+# endpoint      ->  teams
+# path_params   ->  /<teamId>
+# query_params  ->  n/a
+#  ↓ ↓ ↓ EXAMPLE - Atlanta Braves ↓ ↓ ↓
+Get https://statsapi.mlb.com/api/v1/teams/144
+
 
 ###
 
-# ::: 
-GET https://statsapi.mlb.com/api/v1/teams/144
+
+# NOTES -> GET Single MLB Team Regular Season Schedule
+# endpoint      ->  schedule
+# path_params   ->  n/a
+# query_params  ->  ?sportId=1&season=<season>&gameType=R&teamId=<teamId>
+#  ↓ ↓ ↓ EXAMPLE - Atlanta Braves ↓ ↓ ↓
+Get https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2023&gameType=R&teamId=144
+
 
 ###
 
-# ::: 
+
+# NOTES -> GET Single MLB Team Roster
+# endpoint      ->  schedule
+# path_params   ->  teams/<teamId>/roster
+# query_params  ->  n/a
+#  ↓ ↓ ↓ EXAMPLE - Atlanta Braves ↓ ↓ ↓
+GET https://statsapi.mlb.com/api/v1/teams/144/roster
+
+
+###
+
+
+# NOTES -> GET Single MLB Player Info
+# endpoint      ->  people
+# path_params   ->  /<personId>
+# query_params  ->  n/a
+#  ↓ ↓ ↓ EXAMPLE - Ronald Acuna Jr. ↓ ↓ ↓
+GET https://statsapi.mlb.com/api/v1/people/660670
+
+
+###
+
+
+# NOTES -> GET MLB Game Box Score
+# endpoint      ->  game
+# path_params   ->  /<gamePk>/boxscore
+# query_params  ->  n/a
+#  ↓ ↓ ↓ EXAMPLE - Braves @ Phillies on 9/11/23 ↓ ↓ ↓
+GET https://statsapi.mlb.com/api/v1/game/717664/boxscore
+
+
+###
+
+
+# NOTES -> GET MLB Game Line Score
+# endpoint      ->  game
+# path_params   ->  /<gamePk>/linescore
+# query_params  ->  n/a
+#  ↓ ↓ ↓ EXAMPLE - Braves @ Phillies on 9/11/23 ↓ ↓ ↓
+GET https://statsapi.mlb.com/api/v1/game/717664/linescore
+
+
+###
+
+
+# NOTES -> ADVANCED USE CASE: GET Single MLB Player Hitting Stats Split B/W RHP & LHP
+# endpoint      ->  people
+# path_params   ->  n/a
+# query_params  ->  ?personIds=<personIds>&hydrate=stats(group=[hitting],type=[statSplits],sitCodes=[vr,vl])
+#  ↓ ↓ ↓ EXAMPLE - Ronald Acuna Jr. ↓ ↓ ↓
 GET https://statsapi.mlb.com/api/v1/people?personIds=660670&hydrate=stats(group=[hitting,fielding],type=[statSplits],sitCodes=[vr,vl])

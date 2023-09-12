@@ -5,10 +5,11 @@ import * as logo from '@/utils/useMediaUrl'
 
 export default async function HomePage() {
 	const teams = await getAllTeams()
+	
 	return (
 		<main>
 			<div className='page-container'>
-				<div className='home'>
+				<div className='page-content'>
 					{teams.map((team) => (
 						<Link
 							key={team.id}

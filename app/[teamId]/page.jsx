@@ -5,20 +5,21 @@ import * as logo from '@/utils/useMediaUrl'
 
 export default async function TeamDashboardPage({ params }) {
 	const teams = await getTeam(params.teamId)
-	const team = teams[0]
 	return (
 		<main>
 			<div className='page-container'>
-				<div className='page-title'>{team.name} Dashboard</div>
-				<Image
-					src={logo.logoUrlPrimLt(team.id)}
-					width={150}
-					height={150}
-					alt={`${team.teamName} Logo`}
-				/>
+				<div className='page-header'>
+					<Image
+						src={logo.logoUrlPrimLt(teams[0].id)}
+						width={1}
+						height={1}
+						alt={`${teams[0].teamName} Logo`}
+					/>
+					<div className='page-title'>{teams[0].name} Dashboard</div>
+				</div>
 				<div>
-					<Link href={`/${team.id}/schedule`}>Schedule</Link>
-					<Link href={`/${team.id}/roster`}>Roster</Link>
+					<Link href={`/${teams[0].id}/schedule`}>Schedule</Link>
+					<Link href={`/${teams[0].id}/roster`}>Roster</Link>
 				</div>
 			</div>
 		</main>

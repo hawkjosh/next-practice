@@ -167,6 +167,123 @@ export default async function GameInfo({ params }) {
 					</div>
 				</div>
 			</div>
+			<table className='table-auto w-3/4 mx-auto'>
+				<caption className='caption-top text-xl pb-2'>
+					Offensive Game Stats
+				</caption>
+				<thead>
+					<tr>
+						<th className='text-left'>Team</th>
+						<th>R</th>
+						<th>2B</th>
+						<th>3B</th>
+						<th>HR</th>
+						<th>K</th>
+						<th>H</th>
+						<th>SB</th>
+						<th>TB</th>
+						<th>RBI</th>
+						<th>LOB</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					<td className='font-bold flex items-center gap-2'>
+							{awayTeam}
+							<small className='font-light'>
+								({awayWs}-{awayLs})
+							</small>
+						</td>
+						<td className='text-center'>{awayOffense.runs}</td>
+						<td className='text-center'>{awayOffense.doubles}</td>
+						<td className='text-center'>{awayOffense.triples}</td>
+						<td className='text-center'>{awayOffense.homeRuns}</td>
+						<td className='text-center'>{awayOffense.strikeOuts}</td>
+						<td className='text-center'>{awayOffense.hits}</td>
+						<td className='text-center'>{awayOffense.stolenBases}</td>
+						<td className='text-center'>{awayOffense.totalBases}</td>
+						<td className='text-center'>{awayOffense.rbi}</td>
+						<td className='text-center'>{awayOffense.leftOnBase}</td>
+					</tr>
+					<tr>
+						<td className='font-bold flex items-center gap-2'>
+							{homeTeam}
+							<small className='font-light'>
+								({homeWs}-{homeLs})
+							</small>
+						</td>
+						<td className='text-center'>{homeOffense.runs}</td>
+						<td className='text-center'>{homeOffense.doubles}</td>
+						<td className='text-center'>{homeOffense.triples}</td>
+						<td className='text-center'>{homeOffense.homeRuns}</td>
+						<td className='text-center'>{homeOffense.strikeOuts}</td>
+						<td className='text-center'>{homeOffense.hits}</td>
+						<td className='text-center'>{homeOffense.stolenBases}</td>
+						<td className='text-center'>{homeOffense.totalBases}</td>
+						<td className='text-center'>{homeOffense.rbi}</td>
+						<td className='text-center'>{homeOffense.leftOnBase}</td>
+					</tr>
+				</tbody>
+			</table>
+			<br />
+			<table className='table-auto w-3/4 mx-auto'>
+				<caption className='caption-top text-xl pb-2'>
+					Pitching Game Stats
+				</caption>
+				<thead>
+					<tr>
+						<th className='text-left'>Team</th>
+						<th>Runs</th>
+						<th>Hits</th>
+						<th>ER</th>
+						<th>ERA</th>
+						<th>WHIP</th>
+						<th>NP</th>
+						<th>Balls</th>
+						<th>Strikes</th>
+						<th>K</th>
+						<th>BB</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					<td className='font-bold flex items-center gap-2'>
+							{awayTeam}
+							<small className='font-light'>
+								({awayWs}-{awayLs})
+							</small>
+						</td>
+						<td className='text-center'>{awayOffense.runs}</td>
+						<td className='text-center'>{awayOffense.doubles}</td>
+						<td className='text-center'>{awayOffense.triples}</td>
+						<td className='text-center'>{awayOffense.homeRuns}</td>
+						<td className='text-center'>{awayOffense.strikeOuts}</td>
+						<td className='text-center'>{awayOffense.hits}</td>
+						<td className='text-center'>{awayOffense.stolenBases}</td>
+						<td className='text-center'>{awayOffense.totalBases}</td>
+						<td className='text-center'>{awayOffense.rbi}</td>
+						<td className='text-center'>{awayOffense.leftOnBase}</td>
+					</tr>
+					<tr>
+						<td className='font-bold flex items-center gap-2'>
+							{homeTeam}
+							<small className='font-light'>
+								({homeWs}-{homeLs})
+							</small>
+						</td>
+						<td className='text-center'>{homeOffense.runs}</td>
+						<td className='text-center'>{homeOffense.doubles}</td>
+						<td className='text-center'>{homeOffense.triples}</td>
+						<td className='text-center'>{homeOffense.homeRuns}</td>
+						<td className='text-center'>{homeOffense.strikeOuts}</td>
+						<td className='text-center'>{homeOffense.hits}</td>
+						<td className='text-center'>{homeOffense.stolenBases}</td>
+						<td className='text-center'>{homeOffense.totalBases}</td>
+						<td className='text-center'>{homeOffense.rbi}</td>
+						<td className='text-center'>{homeOffense.leftOnBase}</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	)
 }

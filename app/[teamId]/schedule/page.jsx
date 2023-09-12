@@ -1,61 +1,112 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { getSchedule } from '@/lib/getMlbData'
+import { useDateFormat } from '@/utils/useDateFormat'
+import * as logo from '@/utils/useMediaUrl'
 
 export default async function TeamSchedule({ params }) {
 	const dates = await getSchedule(params.teamId)
 
-	// const {
-	// 	date: { games: game },
-	// } = await getSchedule(params.teamId)
-
-	// const {
-	// 	gamePk: gameId,
-	// 	gameDate: gameDate,
-	// 	status: { detailedState: gameState },
-	// 	teams: { away: awayInfo, home: homeInfo },
-	// 	venue: { name: ballpark },
-	// } = game
-
-	// const {
-	// 	leagueRecord: { wins: homeWs, losses: homeLs },
-	// 	score: homeScore,
-	// 	team: { id: homeTeamId, name: homeTeam },
-	// } = homeInfo
-
-	// const {
-	// 	leagueRecord: { wins: awayWs, losses: awayLs },
-	// 	score: awayScore,
-	// 	team: { id: awayTeamId, name: awayTeam },
-	// } = awayInfo
+	const flatGames = dates.flatMap((date) => date.games)
 
 	return (
-		<div className='schedule'>
-			{dates.map((date) =>
-				date.games.map((game) => (
-					<Link
-						key={game.gamePk}
-						href={`/${params.teamId}/schedule/${game.gamePk}`}
-						className={`card`}>
-						<div className='date'>{game.officialDate}</div>
+		<main>
+			<div className='page-container'>
+				<div className='page-header'>
+					<Image
+						src={logo.logoUrlPrimLt(params.teamId)}
+						width={1}
+						height={1}
+						alt='Team Logo'
+					/>
+					<div className='page-title'>{`${
+						useDateFormat(dates[0].date).seasonYear
+					} Schedule`}</div>
+				</div>
+				<div className='schedule'>
+					{flatGames.map((game, index) => {
+						const { gamePk, gameDate, venue, status, teams } = game
+						const { detailedState: gameStatus } = status
+						const { home, away } = teams
+						const {
+							score: homeScore,
+							team: { id: homeId },
+							isWinner: homeTeamWin,
+						} = home
+						const {
+							score: awayScore,
+							team: { id: awayId },
+							isWinner: awayTeamWin,
+						} = away
 
-						<div className='venue'>{game.venue.name}</div>
+						const locationCheck = () =>
+							homeId === parseInt(params.teamId) ? 'home' : 'away'
 
-						{game.status.detailedState === 'Scheduled' && (
-							<div className='time'>{game.gameDate}</div>
-						)}
+						const teamLocation = locationCheck()
 
-						<div className='matchup'>
-							<div className='text-[red]'>{game.teams.away.team.name}</div>
-							<span>@</span>
-							<div className='text-[green]'>{game.teams.home.team.name}</div>
-						</div>
+						const gameComplete = home.hasOwnProperty('score')
 
-						{game.status.detailedState === 'Final' && (
-							<div className='text-[black]'>{`${game.teams.away.team.name} ${game.teams.away.score} - ${game.teams.home.team.name} ${game.teams.home.score}`}</div>
-						)}
-					</Link>
-				))
-			)}
-		</div>
+						const teamWin =
+							(homeTeamWin && teamLocation === 'home') ||
+							(awayTeamWin && teamLocation === 'away')
+
+						const winScore = Math.max(homeScore, awayScore)
+						const loseScore = Math.min(homeScore, awayScore)
+
+						return (
+							<Link
+								key={index}
+								href={`/${params.teamId}/schedule/${gamePk}`}
+								className={`card`}>
+								<div className='date'>{useDateFormat(gameDate).gameDate}</div>
+								<div
+									className={`venue ${
+										teamLocation === 'home' ? 'home' : 'away'
+									}`}>
+									{venue.name}
+								</div>
+								{gameStatus === 'Scheduled' && (
+									<div className='time'>
+										{useDateFormat(gameDate).gameStart}
+									</div>
+								)}
+								<div className='matchup'>
+									<Image
+										src={logo.logoUrlCapLt(params.teamId)}
+										width={1}
+										height={1}
+										alt='Team Logo'
+									/>
+									<span>{teamLocation === 'home' ? 'vs' : '@'}</span>
+									<Image
+										src={
+											teamLocation === 'home'
+												? logo.logoUrlCapLt(awayId)
+												: logo.logoUrlCapLt(homeId)
+										}
+										width={1}
+										height={1}
+										alt='Team Logo'
+									/>
+								</div>
+								{gameComplete && (
+									<div className={`badge ${teamWin ? 'win' : 'lose'}`}>
+										<div className='result'>{teamWin ? 'W' : 'L'}</div>
+										<div className='score'>
+											{winScore} - {loseScore}
+										</div>
+									</div>
+								)}
+								{gameStatus === 'Postponed' && (
+									<div className={`badge postponed`}>
+										<div className='result'>Rain Out</div>
+									</div>
+								)}
+							</Link>
+						)
+					})}
+				</div>
+			</div>
+		</main>
 	)
 }
