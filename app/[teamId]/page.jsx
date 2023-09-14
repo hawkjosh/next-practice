@@ -20,6 +20,7 @@ export default async function TeamDashboardPage({ params }) {
 				<div>
 					<Link href={`/${teams[0].id}/schedule`}>Schedule</Link>
 					<Link href={`/${teams[0].id}/roster`}>Roster</Link>
+					<Link href={`/${teams[0].id}/calendar`}>Calendar</Link>
 				</div>
 			</div>
 		</main>

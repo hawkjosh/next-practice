@@ -183,50 +183,75 @@ body {
 			}
 
 			& .calendar-wrapper {
-				/* max-width: 280px; */
-				/* font: 100% system-ui; */
+				@apply w-full flex flex-col items-center gap-5;
 
-				& h1 {
-					text-align: center;
-					font-size: 2rem;
+				& .calendar-label {
+					@apply text-center text-4xl;
 				}
 
-				& ol {
-					list-style: none;
-					margin: 0;
-					padding: 0;
-					text-align: center;
-					&.calendar {
-						display: grid;
-						grid-template-columns: repeat(7, 1fr);
+				& .calendar-header-row {
+					@apply w-11/12 grid grid-cols-7 text-center font-semibold text-lg;
+				}
 
-						& li {
-							padding: 1rem;
+				& .calendar-body {
+					@apply w-11/12 grid grid-cols-7 text-center gap-[0.25rem];
 
-							&:nth-of-type(n + 8) {
-								border-left: 0.125rem solid white;
-								border-bottom: 0.125rem solid white;
+					& .calendar-cell-outline {
+						&.apr {
+							&:first-child {
+								@apply col-start-5;
 							}
-							&:nth-of-type(9),
-							&:nth-of-type(16),
-							&:nth-of-type(23),
-							&:nth-of-type(30),
-							&:nth-of-type(37) {
-								border-left: none;
+							&:nth-child(2) {
+								@apply col-start-7;
 							}
-							&:nth-of-type(37),
-							&:nth-of-type(38) {
-								border-bottom: none;
+							&:nth-child(14) {
+								@apply col-start-6;
 							}
-							&:nth-of-type(38) {
-								color: transparent;
+							&:nth-child(20) {
+								@apply col-start-6;
 							}
-							&.day-name {
-								font-weight: bold;
-								font-size: 1.25rem;
+						}
+						&.may {
+							&:first-child {
+								@apply col-start-2;
 							}
-							&.first-day {
-								grid-column-start: 7;
+							&:nth-child(2) {
+								@apply hidden;
+							}
+							&:nth-child(9) {
+								@apply col-start-3;
+							}
+							&:nth-child(11) {
+								@apply col-start-6;
+							}
+							&:nth-child(17) {
+								@apply col-start-6;
+							}
+						}
+					}
+
+					& .calendar-cell-content {
+						@apply p-2 flex flex-col gap-2 bg-[slategray];
+
+						& .month-day {
+							@apply text-right;
+						}
+
+						& .matchup {
+							@apply flex justify-center items-center gap-4;
+
+							& span {
+								@apply text-xl;
+								&.home {
+									@apply text-green-400;
+								}
+								&.away {
+									@apply text-red-400;
+								}
+							}
+
+							& img {
+								@apply w-[3rem] h-[3rem];
 							}
 						}
 					}

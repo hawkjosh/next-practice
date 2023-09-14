@@ -44,7 +44,7 @@ export default async function TeamSchedule({ params }) {
 
 						const teamLocation = locationCheck()
 
-						const gameComplete = home.hasOwnProperty('score')
+						const gameComplete = home.hasOwnProperty('isWinner')
 
 						const teamWin =
 							(homeTeamWin && teamLocation === 'home') ||

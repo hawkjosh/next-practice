@@ -4,7 +4,17 @@ export const useDateFormat = (dateStr) => {
 	})
 
 	const monthDay = new Date(dateStr).toLocaleDateString([], {
+		month: 'numeric',
 		day: 'numeric',
+	})
+
+	const calendarDay = new Date(dateStr).toLocaleDateString([], {
+		day: 'numeric',
+	})
+
+	const calendarTitle = new Date(dateStr).toLocaleDateString([], {
+		month: 'long',
+		year: 'numeric',
 	})
 
 	const gameDate = new Date(dateStr).toLocaleDateString('en-us', {
@@ -18,5 +28,12 @@ export const useDateFormat = (dateStr) => {
 		minute: 'numeric',
 	})
 
-	return { seasonYear, monthDay, gameDate, gameStart }
+	return {
+		seasonYear,
+		monthDay,
+		calendarDay,
+		calendarTitle,
+		gameDate,
+		gameStart,
+	}
 }
