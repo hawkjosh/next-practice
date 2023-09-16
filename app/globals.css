@@ -181,77 +181,46 @@ body {
 					}
 				}
 			}
+			& .calendar-container {
+				/* @apply grid grid-cols-2 gap-y-8; */
 
-			& .calendar-wrapper {
-				@apply w-full flex flex-col items-center gap-5;
+				& .calendar-wrapper {
+					@apply w-full flex flex-col gap-5 mb-5;
 
-				& .calendar-label {
-					@apply text-center text-4xl;
-				}
-
-				& .calendar-header-row {
-					@apply w-11/12 grid grid-cols-7 text-center font-semibold text-lg;
-				}
-
-				& .calendar-body {
-					@apply w-11/12 grid grid-cols-7 text-center gap-[0.25rem];
-
-					& .calendar-cell-outline {
-						&.apr {
-							&:first-child {
-								@apply col-start-5;
-							}
-							&:nth-child(2) {
-								@apply col-start-7;
-							}
-							&:nth-child(14) {
-								@apply col-start-6;
-							}
-							&:nth-child(20) {
-								@apply col-start-6;
-							}
-						}
-						&.may {
-							&:first-child {
-								@apply col-start-2;
-							}
-							&:nth-child(2) {
-								@apply hidden;
-							}
-							&:nth-child(9) {
-								@apply col-start-3;
-							}
-							&:nth-child(11) {
-								@apply col-start-6;
-							}
-							&:nth-child(17) {
-								@apply col-start-6;
-							}
-						}
+					& .calendar-label {
+						@apply text-center text-3xl;
 					}
 
-					& .calendar-cell-content {
-						@apply p-2 flex flex-col gap-2 bg-[slategray];
+					& .calendar-header-row {
+						@apply w-11/12 grid grid-cols-7 place-items-center font-bold text-xl mx-auto;
+					}
 
-						& .month-day {
-							@apply text-right;
-						}
+					& .calendar-body {
+						@apply w-11/12 grid grid-cols-7 mx-auto;
 
-						& .matchup {
-							@apply flex justify-center items-center gap-4;
+						& .calendar-day {
+							@apply relative border border-white;
 
-							& span {
-								@apply text-xl;
-								&.home {
-									@apply text-green-400;
-								}
-								&.away {
-									@apply text-red-400;
-								}
+							& .calendar-day-date {
+								@apply absolute top-[2.5%] right-[5%];
 							}
 
-							& img {
-								@apply w-[3rem] h-[3rem];
+							& .calendar-day-info {
+								@apply h-full flex justify-center items-center gap-3 p-3;
+
+								& span {
+									@apply font-semibold text-xl;
+									&.home {
+										@apply text-emerald-500;
+									}
+									&.away {
+										@apply text-rose-500;
+									}
+								}
+
+								& img {
+									@apply w-[3rem] h-[3rem];
+								}
 							}
 						}
 					}

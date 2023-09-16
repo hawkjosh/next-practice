@@ -37,6 +37,17 @@ Get https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2023&gameType=R&te
 ###
 
 
+# NOTES -> GET Single MLB Team Schedule by Month
+# endpoint      ->  schedule
+# path_params   ->  n/a
+# query_params  ->  ?sportId=1&teamId=<teamId>&startDate=<startDate>&endDate=<endDate>
+#  ↓ ↓ ↓ EXAMPLE - Atlanta Braves April 2023 ↓ ↓ ↓
+Get https://statsapi.mlb.com/api/v1/schedule?sportId=1&teamId=144&startDate=2023-04-01&endDate=2023-04-30
+
+
+###
+
+
 # NOTES -> GET Single MLB Team Roster
 # endpoint      ->  schedule
 # path_params   ->  teams/<teamId>/roster
