@@ -1,16 +1,18 @@
-const BASE_URL = 'https://statsapi.mlb.com/api/'
+// const BASE_URL = 'https://statsapi.mlb.com/api/'
+const BASE_URL = 'https://statsapi.mlb.com/api/v1'
 
 const ENDPOINTS = {
 	game_boxscore: {
-		url: `${BASE_URL}{ver}/game/{gamePk}/boxscore`,
+		// url: `${BASE_URL}{ver}/game/{gamePk}/boxscore`,
+		url: `${BASE_URL}/game/{gamePk}/boxscore`,
 		path_params: {
-			ver: {
-				type: 'str',
-				default: 'v1',
-				leading_slash: false,
-				trailing_slash: false,
-				required: true,
-			},
+			// ver: {
+			// 	type: 'str',
+			// 	default: 'v1',
+			// 	leading_slash: false,
+			// 	trailing_slash: false,
+			// 	required: true,
+			// },
 			gamePk: {
 				type: 'str',
 				default: '',
@@ -23,15 +25,16 @@ const ENDPOINTS = {
 		required_params: [[]],
 	},
 	game_linescore: {
-		url: `${BASE_URL}{ver}/game/{gamePk}/linescore`,
+		// url: `${BASE_URL}{ver}/game/{gamePk}/linescore`,
+		url: `${BASE_URL}/game/{gamePk}/linescore`,
 		path_params: {
-			ver: {
-				type: 'str',
-				default: 'v1',
-				leading_slash: false,
-				trailing_slash: false,
-				required: true,
-			},
+			// ver: {
+			// 	type: 'str',
+			// 	default: 'v1',
+			// 	leading_slash: false,
+			// 	trailing_slash: false,
+			// 	required: true,
+			// },
 			gamePk: {
 				type: 'str',
 				default: '',
@@ -44,15 +47,16 @@ const ENDPOINTS = {
 		required_params: [[]],
 	},
 	person: {
-		url: `${BASE_URL}{ver}/people/{personId}`,
+		// url: `${BASE_URL}{ver}/people/{personId}`,
+		url: `${BASE_URL}/people/{personId}`,
 		path_params: {
-			ver: {
-				type: 'str',
-				default: 'v1',
-				leading_slash: false,
-				trailing_slash: false,
-				required: true,
-			},
+			// ver: {
+			// 	type: 'str',
+			// 	default: 'v1',
+			// 	leading_slash: false,
+			// 	trailing_slash: false,
+			// 	required: true,
+			// },
 			personId: {
 				type: 'str',
 				default: '',
@@ -65,15 +69,16 @@ const ENDPOINTS = {
 		required_params: [[]],
 	},
 	schedule: {
-		url: `${BASE_URL}{ver}/schedule`,
+		// url: `${BASE_URL}{ver}/schedule`,
+		url: `${BASE_URL}/schedule`,
 		path_params: {
-			ver: {
-				type: 'str',
-				default: 'v1',
-				leading_slash: false,
-				trailing_slash: false,
-				required: true,
-			},
+			// ver: {
+			// 	type: 'str',
+			// 	default: 'v1',
+			// 	leading_slash: false,
+			// 	trailing_slash: false,
+			// 	required: true,
+			// },
 		},
 		query_params: [
 			'scheduleType',
@@ -95,15 +100,16 @@ const ENDPOINTS = {
 		required_params: [['sportId'], ['gamePk'], ['gamePks']],
 	},
 	all_teams: {
-		url: `${BASE_URL}{ver}/teams`,
+		// url: `${BASE_URL}{ver}/teams`,
+		url: `${BASE_URL}/teams`,
 		path_params: {
-			ver: {
-				type: 'str',
-				default: 'v1',
-				leading_slash: false,
-				trailing_slash: false,
-				required: true,
-			},
+			// ver: {
+			// 	type: 'str',
+			// 	default: 'v1',
+			// 	leading_slash: false,
+			// 	trailing_slash: false,
+			// 	required: true,
+			// },
 		},
 		query_params: [
 			'season',
@@ -118,15 +124,16 @@ const ENDPOINTS = {
 		required_params: [[]],
 	},
 	team: {
-		url: `${BASE_URL}{ver}/teams/{teamId}`,
+		// url: `${BASE_URL}{ver}/teams/{teamId}`,
+		url: `${BASE_URL}/teams/{teamId}`,
 		path_params: {
-			ver: {
-				type: 'str',
-				default: 'v1',
-				leading_slash: false,
-				trailing_slash: false,
-				required: true,
-			},
+			// ver: {
+			// 	type: 'str',
+			// 	default: 'v1',
+			// 	leading_slash: false,
+			// 	trailing_slash: false,
+			// 	required: true,
+			// },
 			teamId: {
 				type: 'str',
 				default: '',
@@ -139,15 +146,16 @@ const ENDPOINTS = {
 		required_params: [[]],
 	},
 	team_roster: {
-		url: `${BASE_URL}{ver}/teams/{teamId}/roster`,
+		// url: `${BASE_URL}{ver}/teams/{teamId}/roster`,
+		url: `${BASE_URL}/teams/{teamId}/roster`,
 		path_params: {
-			ver: {
-				type: 'str',
-				default: 'v1',
-				leading_slash: false,
-				trailing_slash: false,
-				required: true,
-			},
+			// ver: {
+			// 	type: 'str',
+			// 	default: 'v1',
+			// 	leading_slash: false,
+			// 	trailing_slash: false,
+			// 	required: true,
+			// },
 			teamId: {
 				type: 'str',
 				default: '',

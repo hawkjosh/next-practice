@@ -4,23 +4,44 @@ import { getTeam } from '@/lib/getMlbData'
 import * as logo from '@/utils/useMediaUrl'
 
 export default async function TeamDashboardPage({ params }) {
-	const teams = await getTeam(params.teamId)
+	// const data = await getTeam(params.teamId)
+	// const {id: teamId, name: longName, teamName: shortName} = data[0]
+
+	const {teams} = await getTeam(params.teamId)
+	console.log(teams[0])
+
 	return (
 		<main>
-			<div className='page-container'>
+			{/* <div className='page-container'>
 				<div className='page-header'>
 					<Image
-						src={logo.logoUrlPrimLt(teams[0].id)}
+						src={logo.logoUrlPrimLt(teamId)}
 						width={1}
 						height={1}
-						alt={`${teams[0].teamName} Logo`}
+						alt={`${shortName} Logo`}
 					/>
-					<div className='page-title'>{teams[0].name} Dashboard</div>
+					<div className='page-title'>{longName} Dashboard</div>
 				</div>
 				<div>
-					<Link href={`/${teams[0].id}/schedule`}>Schedule</Link>
-					<Link href={`/${teams[0].id}/roster`}>Roster</Link>
-					<Link href={`/${teams[0].id}/calendar`}>Calendar</Link>
+					<Link href={`/${teamId}/schedule`}>Schedule</Link>
+					<Link href={`/${teamId}/roster`}>Roster</Link>
+					<Link href={`/${teamId}/calendar`}>Calendar</Link>
+				</div>
+			</div> */}
+			<div className='page-container'>
+				<div className='page-header'>
+					{/* <Image
+						src={logo.logoUrlPrimLt(teamId)}
+						width={1}
+						height={1}
+						alt={`${shortName} Logo`}
+					/> */}
+					<div className='page-title'></div>
+				</div>
+				<div>
+					<Link href='#'>Schedule</Link>
+					<Link href='#'>Roster</Link>
+					<Link href='#'>Calendar</Link>
 				</div>
 			</div>
 		</main>
