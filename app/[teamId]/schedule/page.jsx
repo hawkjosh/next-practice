@@ -5,26 +5,27 @@ import { useDateFormat } from '@/utils/useDateFormat'
 import * as logo from '@/utils/useMediaUrl'
 
 export default async function TeamSchedule({ params }) {
-	const dates = await getSchedule(params.teamId)
-
-	const flatGames = dates.flatMap((date) => date.games)
+	const { title, games } = await getSchedule(params.teamId)
 
 	return (
-		<main>
-			<div className='page-container'>
-				<div className='page-header'>
-					<Image
-						src={logo.logoUrlPrimLt(params.teamId)}
-						width={1}
-						height={1}
-						alt='Team Logo'
-					/>
-					<div className='page-title'>{`${
-						useDateFormat(dates[0].date).seasonYear
-					} Schedule`}</div>
+		<div className='container max-w-screen-xl mx-auto'>
+			<div className='container flex flex-col gap-4 mx-auto'>
+				<div className='flex items-center gap-2 p-3 justify-evenly'>
+					<Link href={`/${params.teamId}`}>
+						<Image
+							src={logo.logoUrlPrimLt(params.teamId)}
+							width={100}
+							height={100}
+							alt='Team Logo'
+							className='h-auto w-28 md:w-48 lg:w-72 xl:w-96'
+						/>
+					</Link>
+					<div className='text-lg font-extrabold text-center uppercase md:text-2xl lg:text-4xl xl:text-6xl'>
+						{`${useDateFormat(title).seasonYear} Schedule`}
+					</div>
 				</div>
-				<div className='schedule'>
-					{flatGames.map((game, index) => {
+				<div className='grid grid-flow-row grid-cols-2 gap-2 px-4 @[40rem]:grid-cols-3 @[48rem]:grid-cols-4 @[60rem]:grid-cols-5 @[80rem]:grid-cols-6'>
+					{games.map((game, index) => {
 						const { gamePk, gameDate, venue, status, teams } = game
 						const { detailedState: gameStatus } = status
 						const { home, away } = teams
@@ -57,27 +58,34 @@ export default async function TeamSchedule({ params }) {
 							<Link
 								key={index}
 								href={`/${params.teamId}/schedule/${gamePk}`}
-								className={`card`}>
-								<div className='date'>{useDateFormat(gameDate).gameDate}</div>
+								className='relative flex flex-col items-center w-full gap-1 pt-3 pb-6 transition duration-300 bg-white border border-solid rounded-lg cursor-default border-slate-400 hover:scale-105'>
+								<div className='mb-0 text-lg font-bold text-gray-700'>
+									{useDateFormat(gameDate).gameDate}
+								</div>
 								<div
-									className={`venue ${
-										teamLocation === 'home' ? 'home' : 'away'
+									className={`pb-2 text-sm leading-relaxed text-gray-500 capitalize ${
+										teamLocation === 'home'
+											? 'text-emerald-700'
+											: 'text-rose-700'
 									}`}>
 									{venue.name}
 								</div>
 								{gameStatus === 'Scheduled' && (
-									<div className='time'>
+									<div className='mb-0 text-base font-semibold text-gray-600'>
 										{useDateFormat(gameDate).gameStart}
 									</div>
 								)}
-								<div className='matchup'>
+								<div className='flex items-center justify-center gap-3'>
 									<Image
 										src={logo.logoUrlCapLt(params.teamId)}
 										width={1}
 										height={1}
 										alt='Team Logo'
+										className='w-[2rem] h-[2rem]'
 									/>
-									<span>{teamLocation === 'home' ? 'vs' : '@'}</span>
+									<div className='font-bold text-slate-900'>
+										{teamLocation === 'home' ? 'vs' : '@'}
+									</div>
 									<Image
 										src={
 											teamLocation === 'home'
@@ -87,19 +95,20 @@ export default async function TeamSchedule({ params }) {
 										width={1}
 										height={1}
 										alt='Team Logo'
+										className='w-[2rem] h-[2rem]'
 									/>
 								</div>
 								{gameComplete && (
-									<div className={`badge ${teamWin ? 'win' : 'lose'}`}>
-										<div className='result'>{teamWin ? 'W' : 'L'}</div>
-										<div className='score'>
+									<div className={`absolute bottom-0 right-0 rounded-tl-lg rounded-br-lg py-0.5 px-1.5 mt-3 flex flex-col items-center ${teamWin ? 'bg-green-700' : 'bg-red-600'}`}>
+										<div className='text-sm font-bold'>{teamWin ? 'W' : 'L'}</div>
+										<div className='text-xs font-semibold'>
 											{winScore} - {loseScore}
 										</div>
 									</div>
 								)}
 								{gameStatus === 'Postponed' && (
-									<div className={`badge postponed`}>
-										<div className='result'>Rain Out</div>
+									<div className={`absolute bottom-0 right-0 rounded-tl-lg rounded-br-lg py-0.5 px-1.5 mt-3 flex flex-col items-center bg-yellow-400 text-red-600`}>
+										<div className='text-sm font-bold'>Rain Out</div>
 									</div>
 								)}
 							</Link>
@@ -107,6 +116,6 @@ export default async function TeamSchedule({ params }) {
 					})}
 				</div>
 			</div>
-		</main>
+		</div>
 	)
 }

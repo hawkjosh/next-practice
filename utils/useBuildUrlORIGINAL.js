@@ -1,26 +1,6 @@
 const BASE_URL = 'https://statsapi.mlb.com/api/v1'
 
 const ENDPOINTS = {
-	teams: {
-		url: `${BASE_URL}/teams`,
-		path_params: {},
-		query_params: ['sportId', 'teamId', 'hydrate', 'fields'],
-		required_params: [['sportId'], ['teamId']],
-	},
-	roster: {
-		url: `${BASE_URL}/teams/{teamId}/roster`,
-		path_params: {
-			teamId: {
-				type: 'str',
-				default: '',
-				leading_slash: false,
-				trailing_slash: false,
-				required: true,
-			},
-		},
-		query_params: ['rosterType', 'season', 'hydrate', 'fields'],
-		required_params: [[]],
-	},
 	game_boxscore: {
 		url: `${BASE_URL}/game/{gamePk}/boxscore`,
 		path_params: {
@@ -32,7 +12,7 @@ const ENDPOINTS = {
 				required: true,
 			},
 		},
-		query_params: ['fields'],
+		query_params: ['timecode', 'fields'],
 		required_params: [[]],
 	},
 	game_linescore: {
@@ -46,7 +26,7 @@ const ENDPOINTS = {
 				required: true,
 			},
 		},
-		query_params: ['fields'],
+		query_params: ['timecode', 'fields'],
 		required_params: [[]],
 	},
 	person: {
@@ -85,6 +65,21 @@ const ENDPOINTS = {
 		],
 		required_params: [['sportId'], ['gamePk'], ['gamePks']],
 	},
+	all_teams: {
+		url: `${BASE_URL}/teams`,
+		path_params: {},
+		query_params: [
+			'season',
+			'activeStatus',
+			'leagueIds',
+			'sportId',
+			'sportIds',
+			'gameType',
+			'hydrate',
+			'fields',
+		],
+		required_params: [[]],
+	},
 	// team: {
 	// 	url: `${BASE_URL}/teams/{teamId}`,
 	// 	path_params: {
@@ -99,6 +94,35 @@ const ENDPOINTS = {
 	// 	query_params: ['season', 'sportId', 'hydrate', 'fields'],
 	// 	required_params: [[]],
 	// },
+	team: {
+		url: `${BASE_URL}/teams`,
+		// path_params: {
+		// 	teamId: {
+		// 		type: 'str',
+		// 		default: '',
+		// 		leading_slash: false,
+		// 		trailing_slash: false,
+		// 		required: true,
+		// 	},
+		// },
+		path_params: {},
+		query_params: ['season', 'sportId', 'hydrate', 'fields', 'teamId'],
+		required_params: [['teamId']],
+	},
+	team_roster: {
+		url: `${BASE_URL}/teams/{teamId}/roster`,
+		path_params: {
+			teamId: {
+				type: 'str',
+				default: '',
+				leading_slash: false,
+				trailing_slash: false,
+				required: true,
+			},
+		},
+		query_params: ['rosterType', 'season', 'date', 'hydrate', 'fields'],
+		required_params: [[]],
+	},
 }
 
 export default function buildUrl(endpoint, pathParams = {}, queryParams = {}) {

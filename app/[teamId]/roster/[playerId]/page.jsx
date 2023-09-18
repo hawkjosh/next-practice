@@ -11,9 +11,10 @@ export default async function PlayerInfo({ params }) {
 				<div className='flex px-2'>Player Name: {player.fullName}</div>
 				<Image
 					src={headshotUrl(player.id)}
-					width={25}
-					height={25}
+					width={100}
+					height={100}
 					alt={`${player.fullName} Headshot`}
+					className='w-32 height-auto lg:w-48 xl:w-64'
 				/>
 				<div className='flex px-2'>Number: {player.primaryNumber}</div>
 				<div className='flex px-2'>

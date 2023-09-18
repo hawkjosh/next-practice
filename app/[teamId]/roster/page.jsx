@@ -9,24 +9,30 @@ export default async function TeamRoster({ params }) {
 	return (
 		<div>
 			<div className='flex flex-col divide-y'>
-				{roster.map((player) => (
-					<Link
-						key={player.person.id}
-						href={`/${params.teamId}/roster/${player.person.id}`}
-						className='flex divide-x py-2 items-center'>
-						<div className='flex px-2'>
-							Player Name: {player.person.fullName}
-						</div>
-						<Image
-							src={headshotUrl(player.person.id)}
-							width={25}
-							height={25}
-							alt={`${player.person.fullName} Headshot`}
-						/>
-						<div className='flex px-2'>Number: {player.jerseyNumber}</div>
-						<div className='flex px-2'>Position: {player.position.name}</div>
-					</Link>
-				))}
+				{roster.map((player, index) => {
+					const {
+						person: { id: playerId, fullName: playerName },
+						jerseyNumber: playerNumber,
+						position: { name: playerPosition },
+					} = player
+					return (
+						<Link
+							key={index}
+							href={`/${params.teamId}/roster/${playerId}`}
+							className='flex items-center py-2 divide-x'>
+							<div className='flex px-2'>Player Name: {playerName}</div>
+							<Image
+								src={headshotUrl(playerId)}
+								width={100}
+								height={100}
+								alt={`${playerName} Headshot`}
+								className='w-12 height-auto sm:w-14 md:w-16 lg:w-20 xl:w-24'
+							/>
+							<div className='flex px-2'>Number: {playerNumber}</div>
+							<div className='flex px-2'>Position: {playerPosition}</div>
+						</Link>
+					)
+				})}
 			</div>
 		</div>
 	)
