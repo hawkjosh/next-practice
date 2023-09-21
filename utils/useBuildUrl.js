@@ -7,6 +7,25 @@ const ENDPOINTS = {
 		query_params: ['sportId', 'teamId', 'hydrate', 'fields'],
 		required_params: [['sportId'], ['teamId']],
 	},
+	schedule: {
+		url: `${BASE_URL}/schedule`,
+		path_params: {},
+		query_params: [
+			'date',
+			'endDate',
+			'gamePk',
+			'gamePks',
+			'opponentId',
+			'scheduleType',
+			'sportId',
+			'startDate',
+			'teamId',
+			'venueIds',
+			'hydrate',
+			'fields',
+		],
+		required_params: [['sportId'], ['gamePk'], ['gamePks']],
+	},
 	roster: {
 		url: `${BASE_URL}/teams/{teamId}/roster`,
 		path_params: {
@@ -18,38 +37,10 @@ const ENDPOINTS = {
 				required: true,
 			},
 		},
-		query_params: ['rosterType', 'season', 'hydrate', 'fields'],
+		query_params: ['season', 'hydrate', 'fields'],
 		required_params: [[]],
 	},
-	game_boxscore: {
-		url: `${BASE_URL}/game/{gamePk}/boxscore`,
-		path_params: {
-			gamePk: {
-				type: 'str',
-				default: '',
-				leading_slash: false,
-				trailing_slash: false,
-				required: true,
-			},
-		},
-		query_params: ['fields'],
-		required_params: [[]],
-	},
-	game_linescore: {
-		url: `${BASE_URL}/game/{gamePk}/linescore`,
-		path_params: {
-			gamePk: {
-				type: 'str',
-				default: '',
-				leading_slash: false,
-				trailing_slash: false,
-				required: true,
-			},
-		},
-		query_params: ['fields'],
-		required_params: [[]],
-	},
-	person: {
+	player: {
 		url: `${BASE_URL}/people/{personId}`,
 		path_params: {
 			personId: {
@@ -63,42 +54,34 @@ const ENDPOINTS = {
 		query_params: ['hydrate', 'fields'],
 		required_params: [[]],
 	},
-	schedule: {
-		url: `${BASE_URL}/schedule`,
-		path_params: {},
-		query_params: [
-			'scheduleType',
-			'eventTypes',
-			'hydrate',
-			'teamId',
-			'leagueId',
-			'sportId',
-			'gamePk',
-			'gamePks',
-			'venueIds',
-			'gameTypes',
-			'date',
-			'startDate',
-			'endDate',
-			'opponentId',
-			'fields',
-		],
-		required_params: [['sportId'], ['gamePk'], ['gamePks']],
+	boxscore: {
+		url: `${BASE_URL}/game/{gamePk}/boxscore`,
+		path_params: {
+			gamePk: {
+				type: 'str',
+				default: '',
+				leading_slash: false,
+				trailing_slash: false,
+				required: true,
+			},
+		},
+		query_params: ['fields'],
+		required_params: [[]],
 	},
-	// team: {
-	// 	url: `${BASE_URL}/teams/{teamId}`,
-	// 	path_params: {
-	// 		teamId: {
-	// 			type: 'str',
-	// 			default: '',
-	// 			leading_slash: false,
-	// 			trailing_slash: false,
-	// 			required: true,
-	// 		},
-	// 	},
-	// 	query_params: ['season', 'sportId', 'hydrate', 'fields'],
-	// 	required_params: [[]],
-	// },
+	linescore: {
+		url: `${BASE_URL}/game/{gamePk}/linescore`,
+		path_params: {
+			gamePk: {
+				type: 'str',
+				default: '',
+				leading_slash: false,
+				trailing_slash: false,
+				required: true,
+			},
+		},
+		query_params: ['fields'],
+		required_params: [[]],
+	},
 }
 
 export default function buildUrl(endpoint, pathParams = {}, queryParams = {}) {
