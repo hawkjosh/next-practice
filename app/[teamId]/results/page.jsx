@@ -128,12 +128,64 @@ import * as logo from '@/utils/useMediaUrl'
 // 	)
 // }
 
+const renderGameInfo = (games) => {
+	return games.map((game, index) => {
+		const {
+			teams: {
+				home: {
+					score: homeScore,
+					team: { id: homeId, name: homeTeam },
+					isWinner: isHomeWin,
+				},
+				away: {
+					score: awayScore,
+					team: { id: awayId, name: awayTeam },
+				},
+			},
+		} = game
+
+		return (
+			<div key={index}>
+				{isHomeWin ? (
+					<div className='flex items-center gap-3'>
+						<Image
+							src={logo.logoUrlCapLt(homeId)}
+							width={100}
+							height={100}
+							alt={`${homeTeam} Logo`}
+							className='w-8 h-auto md:w-9 lg:w-10 xl:w-11'
+						/>
+						<div className='text-white'>
+							{homeTeam} win {homeScore} - {awayScore}
+						</div>
+					</div>
+				) : (
+					<div className='flex items-center gap-3'>
+						<Image
+							src={logo.logoUrlCapLt(awayId)}
+							width={100}
+							height={100}
+							alt={`${awayTeam} Logo`}
+							className='w-8 h-auto md:w-9 lg:w-10 xl:w-11'
+						/>
+						<div className='text-white'>
+							{awayTeam} win {awayScore} - {homeScore}
+						</div>
+					</div>
+				)}
+			</div>
+		)
+	})
+}
+
 export default async function TeamSchedule({ params }) {
-	const dates = await getSchedule(params.teamId)
+	const result = await getSchedule(params.teamId)
+
+	const { dates } = result
 
 	return (
-		<div className='container max-w-screen-xl mx-auto'>
-			<div className='flex flex-col w-11/12 gap-12 mx-auto'>
+		<div>
+			<div>
 				<div className='flex items-center gap-2 p-3 justify-evenly'>
 					<Link href={`/${params.teamId}`}>
 						<Image
@@ -148,55 +200,132 @@ export default async function TeamSchedule({ params }) {
 						Results
 					</div>
 				</div>
-				{dates.map((date) => (
-					<div>
-						{date.totalGames === 1 ? (
-							<div className='flex items-center gap-2'>
-								<div>{useDateFormat(date.games[0].gameDate).gameDate}</div>
-								<div>→</div>
-								{date.games[0].status.detailedState === 'Postponed' ? (
-									<div className='text-yellow-500'>
-										POSTPONED: Rescheduled to{' '}
-										{useDateFormat(date.games[0].rescheduleDate).gameDate}
-									</div>
-								) : (
-									<div>
-									{date.games[0].teams.away.isWinner && 
-										`${date.games[0].teams.away.team.name} beat ${date.games[0].teams.home.team.name} ${date.games[0].teams.away.score} - ${date.games[0].teams.home.score}`
-									}
-									{date.games[0].teams.home.isWinner && 
-										`${date.games[0].teams.home.team.name} beat ${date.games[0].teams.away.team.name} ${date.games[0].teams.home.score} - ${date.games[0].teams.away.score}`
-									}
-									</div>
-								)}
-							</div>
-						) : (
-							<div className='flex items-center gap-2'>
-								<div>{useDateFormat(date.games[0].gameDate).gameDate}</div>
-								<div>→</div>
-								<div>DOUBLE-HEADER:</div>
-								<div>
-									{date.games[0].teams.away.isWinner && 
-										`${date.games[0].teams.away.team.name} beat ${date.games[0].teams.home.team.name} ${date.games[0].teams.away.score} - ${date.games[0].teams.home.score}`
-									}
-									{date.games[0].teams.home.isWinner && 
-										`${date.games[0].teams.home.team.name} beat ${date.games[0].teams.away.team.name} ${date.games[0].teams.home.score} - ${date.games[0].teams.away.score}`
-									}
-									</div>
-									<div>|</div>
-									<div>
-									{date.games[1].teams.away.isWinner && 
-										`${date.games[1].teams.away.team.name} beat ${date.games[1].teams.home.team.name} ${date.games[1].teams.away.score} - ${date.games[1].teams.home.score}`
-									}
-									{date.games[1].teams.home.isWinner && 
-										`${date.games[1].teams.home.team.name} beat ${date.games[1].teams.away.team.name} ${date.games[1].teams.home.score} - ${date.games[1].teams.away.score}`
-									}
-									</div>
-							</div>
-						)}
-					</div>
-				))}
+				{dates.map((date, index) => {
+					const gameDate = date.games[0].gameDate
+					const isDoubleHeader = Boolean(date.totalGames > 1)
+
+					return (
+						<div
+							key={index}
+							className='flex items-center gap-2'>
+							<div>{useDateFormat(gameDate).gameDate}</div>
+							<div>→</div>
+							{isDoubleHeader && <div>DOUBLE-HEADER:</div>}
+							{renderGameInfo(date.games)}
+						</div>
+					)
+				})}
 			</div>
 		</div>
 	)
 }
+
+// export default async function TeamSchedule({ params }) {
+// 	const result = await getSchedule(params.teamId)
+
+// 	const { dates } = result
+
+// 	return (
+// 		<div className='container max-w-screen-xl mx-auto'>
+// 			<div className='flex flex-col w-11/12 gap-12 mx-auto'>
+// 				<div className='flex items-center gap-2 p-3 justify-evenly'>
+// 					<Link href={`/${params.teamId}`}>
+// 						<Image
+// 							src={logo.logoUrlPrimLt(params.teamId)}
+// 							width={100}
+// 							height={100}
+// 							alt='Team Logo'
+// 							className='h-auto w-28 md:w-48 lg:w-72 xl:w-96'
+// 						/>
+// 					</Link>
+// 					<div className='text-lg font-extrabold text-center uppercase md:text-2xl lg:text-4xl xl:text-6xl'>
+// 						Results
+// 					</div>
+// 				</div>
+// 				{dates.map((date, index) => {
+// 					const isDoubleHeader = Boolean(date.totalGames > 1)
+// 					const gameOne = date.games[0]
+// 					const gameTwo = date.games[1]
+// 					// const gameTwo = isDoubleHeader ? date.games[1] : null
+// 					// console.log(gameTwo)
+
+// 					const {
+// 						gameDate,
+// 						rescheduleDate,
+// 						status: { detailedState },
+// 						teams: {
+// 							home: {
+// 								score: homeScore,
+// 								team: { id: homeId, name: homeTeam },
+// 								isWinner: isHomeWin,
+// 							},
+// 							away: {
+// 								score: awayScore,
+// 								team: { id: awayId, name: awayTeam },
+// 							},
+// 						},
+// 					} = gameOne
+
+// 					// const {
+// 					// 	teams: {
+// 					// 		home: {
+// 					// 			score: homeScoreGameTwo,
+// 					// 			team: { id: homeIdGameTwo, name: homeTeamGameTwo },
+// 					// 			isWinner: isHomeWinGameTwo,
+// 					// 		},
+// 					// 		away: {
+// 					// 			score: awayScoreGameTwo,
+// 					// 			team: { id: awayIdGameTwo, name: awayTeamGameTwo },
+// 					// 		},
+// 					// 	},
+// 					// } = gameTwo
+
+// 					const isPostponed = Boolean(detailedState === 'Postponed')
+// 					const homeWinner = Boolean(isHomeWin === true)
+// 					// const homeWinnerGameTwo = Boolean(isHomeWinGameTwo === true)
+
+// 					return (
+// 						<div key={index}>
+// 							{!isDoubleHeader ? (
+// 								<div className='flex items-center gap-2'>
+// 									<div>{useDateFormat(gameDate).gameDate}</div>
+// 									<div>→</div>
+// 									{isPostponed ? (
+// 										<div className='text-yellow-500'>
+// 											POSTPONED: Rescheduled to{' '}
+// 											{useDateFormat(rescheduleDate).gameDate}
+// 										</div>
+// 									) : (
+// 										<div>
+// 											{homeWinner
+// 												? `${homeTeam} beat ${awayTeam} ${homeScore} - ${awayScore}`
+// 												: `${awayTeam} beat ${homeTeam} ${awayScore} - ${homeScore}`}
+// 										</div>
+// 									)}
+// 								</div>
+// 							) : (
+// 								<div className='flex items-center gap-2'>
+// 									<div>{useDateFormat(gameDate).gameDate}</div>
+// 									<div>→</div>
+// 									<div>DOUBLE-HEADER:</div>
+// 									<div>
+// 										{homeWinner
+// 											? `${homeTeam} beat ${awayTeam} ${homeScore} - ${awayScore}`
+// 											: `${awayTeam} beat ${homeTeam} ${awayScore} - ${homeScore}`}
+// 									</div>
+// 									<div>|</div>
+// 									<div>
+// 										{gameTwo.teams.away.isWinner &&
+// 											`${gameTwo.teams.away.team.name} beat ${gameTwo.teams.home.team.name} ${gameTwo.teams.away.score} - ${gameTwo.teams.home.score}`}
+// 										{gameTwo.teams.home.isWinner &&
+// 											`${gameTwo.teams.home.team.name} beat ${gameTwo.teams.away.team.name} ${gameTwo.teams.home.score} - ${gameTwo.teams.away.score}`}
+// 									</div>
+// 								</div>
+// 							)}
+// 						</div>
+// 					)
+// 				})}
+// 			</div>
+// 		</div>
+// 	)
+// }

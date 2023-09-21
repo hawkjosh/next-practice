@@ -3,7 +3,6 @@ const BASE_URL = 'https://statsapi.mlb.com/api/v1'
 const ENDPOINTS = {
 	teams: {
 		url: `${BASE_URL}/teams`,
-		path_params: {},
 		query_params: ['sportId', 'teamId', 'hydrate', 'fields'],
 		required_params: [['sportId'], ['teamId']],
 	},

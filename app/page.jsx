@@ -4,14 +4,23 @@ import { getTeams } from '@/lib/getMlbData'
 import * as logo from '@/utils/useMediaUrl'
 
 export default async function HomePage() {
-	const teams = await getTeams()
+	const result = await getTeams()
+	
+	const { teams } = result
+	
+	teams.sort((a, b) => {
+		if (a.name < b.name) return -1
+		if (a.name > b.name) return 1
+		return 0
+	})
 
 	return (
 		<div className='container max-w-screen-xl mx-auto'>
 			<div className='flex flex-col items-center gap-8 mb-6 md:gap-10 xl:gap-12'>
-				<div className="text-2xl font-semibold md:text-3xl lg:text-4xl xl:text-5xl">Choose a team...</div>
-				<div
-				className='grid w-[70%] grid-cols-3 mx-auto gap-x-1.5 gap-y-9 grid-flow-dense place-items-center md:grid-cols-5 md:w-11/12 lg:grid-cols-6 md:gap-y-10'>
+				<div className='text-2xl font-semibold md:text-3xl lg:text-4xl xl:text-5xl'>
+					Choose a team...
+				</div>
+				<div className='grid w-[70%] grid-cols-3 mx-auto gap-x-1.5 gap-y-9 grid-flow-dense place-items-center md:grid-cols-5 md:w-11/12 lg:grid-cols-6 md:gap-y-10'>
 					{teams.map((team, key) => {
 						const { id: teamId, clubName: teamName } = team
 						return (
