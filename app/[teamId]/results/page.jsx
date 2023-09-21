@@ -145,34 +145,23 @@ const renderGameInfo = (games) => {
 		} = game
 
 		return (
-			<div key={index}>
-				{isHomeWin ? (
-					<div className='flex items-center gap-3'>
-						<Image
-							src={logo.logoUrlCapLt(homeId)}
-							width={100}
-							height={100}
-							alt={`${homeTeam} Logo`}
-							className='w-8 h-auto md:w-9 lg:w-10 xl:w-11'
-						/>
-						<div className='text-white'>
-							{homeTeam} win {homeScore} - {awayScore}
-						</div>
-					</div>
-				) : (
-					<div className='flex items-center gap-3'>
-						<Image
-							src={logo.logoUrlCapLt(awayId)}
-							width={100}
-							height={100}
-							alt={`${awayTeam} Logo`}
-							className='w-8 h-auto md:w-9 lg:w-10 xl:w-11'
-						/>
-						<div className='text-white'>
-							{awayTeam} win {awayScore} - {homeScore}
-						</div>
-					</div>
-				)}
+			<div
+				key={index}
+				className='flex items-center gap-3'>
+				<Image
+					src={
+						isHomeWin ? logo.logoUrlCapLt(homeId) : logo.logoUrlCapLt(awayId)
+					}
+					width={100}
+					height={100}
+					alt={`${isHomeWin ? homeTeam : awayTeam} Logo`}
+					className='w-8 h-auto md:w-9 lg:w-10 xl:w-11'
+				/>
+				<div>
+					{`win ${isHomeWin ? homeScore : awayScore} - ${
+						isHomeWin ? awayScore : homeScore
+					}`}
+				</div>
 			</div>
 		)
 	})
@@ -184,8 +173,8 @@ export default async function TeamSchedule({ params }) {
 	const { dates } = result
 
 	return (
-		<div>
-			<div>
+		<div className='container max-w-screen-xl mx-auto'>
+			<div className='flex flex-col w-11/12 gap-12 mx-auto'>
 				<div className='flex items-center gap-2 p-3 justify-evenly'>
 					<Link href={`/${params.teamId}`}>
 						<Image
@@ -207,11 +196,12 @@ export default async function TeamSchedule({ params }) {
 					return (
 						<div
 							key={index}
-							className='flex items-center gap-2'>
+							className='flex items-center gap-4'>
 							<div>{useDateFormat(gameDate).gameDate}</div>
 							<div>→</div>
-							{isDoubleHeader && <div>DOUBLE-HEADER:</div>}
-							{renderGameInfo(date.games)}
+							<div className='flex flex-col items-center gap-3'>
+								{renderGameInfo(date.games)}
+							</div>
 						</div>
 					)
 				})}
