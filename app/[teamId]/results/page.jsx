@@ -172,6 +172,8 @@ export default async function TeamSchedule({ params }) {
 
 	const { dates } = result
 
+	console.log(useDateFormat(dates[0].date).seasonYear)
+
 	return (
 		<div className='container max-w-screen-xl mx-auto'>
 			<div className='flex flex-col w-11/12 gap-12 mx-auto'>
@@ -186,7 +188,7 @@ export default async function TeamSchedule({ params }) {
 						/>
 					</Link>
 					<div className='text-lg font-extrabold text-center uppercase md:text-2xl lg:text-4xl xl:text-6xl'>
-						Results
+						{useDateFormat(dates[0].date).seasonYear} Results
 					</div>
 				</div>
 				{dates.map((date, index) => {
