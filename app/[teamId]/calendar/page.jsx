@@ -5,9 +5,13 @@ import { getMonthScheduleData } from '@/lib/getMonthScheduleData'
 import * as logo from '@/utils/useMediaUrl'
 
 export default async function CalendarSchedule({ params }) {
-	const { location, teamName } = await getTeam(params.teamId)
+	const teamResult = await getTeam(params.teamId)
 
-	const months = ['Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
+	const {
+		teams: [{ id, franchiseName, clubName }],
+	} = teamResult
+
+	const months = ['Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']
 	const data = await Promise.all(
 		months.map(async (month) => {
 			const { calendarTitle, calendarData, emptyCells } =
@@ -24,22 +28,22 @@ export default async function CalendarSchedule({ params }) {
 	return (
 		<div className='container max-w-screen-xl mx-auto mb-6'>
 			<div className='flex flex-col w-11/12 gap-12 mx-auto'>
-				<Link
-					href={`/${params.teamId}`}
+			<Link
+					href={`/${id}`}
 					className='flex flex-col items-center gap-6 pb-6 border-b-4 justify-evenly sm:flex-row sm:gap-2 sm:px-4'>
 					<Image
-						src={logo.logoUrlPrimDrk(params.teamId)}
+						src={logo.logoUrlPrimDrk(id)}
 						width={100}
 						height={100}
-						alt={`${teamName} Logo`}
+						alt={`${clubName} Logo`}
 						className='w-1/3 h-auto max-w-xs min-w-[10rem] sm:w-1/4'
 					/>
 					<div className='flex items-center gap-2.5 sm:flex-col sm:gap-5 md:gap-6 lg:gap-7 xl:gap-8'>
 						<div className='text-2xl font-bold uppercase sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl'>
-							{location}
+							{franchiseName}
 						</div>
 						<div className='text-2xl font-bold uppercase sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl'>
-							{teamName}
+							{clubName}
 						</div>
 					</div>
 				</Link>

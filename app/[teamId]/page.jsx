@@ -4,11 +4,11 @@ import { getTeam } from '@/lib/getMlbData'
 import * as logo from '@/utils/useMediaUrl'
 
 export default async function TeamDashboardPage({ params }) {
-	const result = await getTeam(params.teamId)
-	
+	const teamResult = await getTeam(params.teamId)
+
 	const {
 		teams: [{ id, franchiseName, clubName }],
-	} = result
+	} = teamResult
 
 	return (
 		<div className='container max-w-screen-xl mx-auto'>

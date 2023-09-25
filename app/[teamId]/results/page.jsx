@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { getSchedule } from '@/lib/getMlbData'
+import { getTeam, getSchedule } from '@/lib/getMlbData'
 import { useDateFormat } from '@/utils/useDateFormat'
 import * as logo from '@/utils/useMediaUrl'
 
@@ -168,43 +168,54 @@ const renderGameInfo = (games) => {
 }
 
 export default async function TeamSchedule({ params }) {
-	const result = await getSchedule(params.teamId)
+	const teamResult = await getTeam(params.teamId)
+	const scheduleResult = await getSchedule(params.teamId)
 
-	const { dates } = result
+	const {
+		teams: [{ id, franchiseName, clubName }],
+	} = teamResult
 
-	console.log(useDateFormat(dates[0].date).seasonYear)
+	const { dates } = scheduleResult
 
 	return (
 		<div className='container max-w-screen-xl mx-auto'>
 			<div className='flex flex-col w-11/12 gap-12 mx-auto'>
-				<div className='flex items-center gap-2 p-3 justify-evenly'>
-					<Link href={`/${params.teamId}`}>
-						<Image
-							src={logo.logoUrlPrimLt(params.teamId)}
-							width={100}
-							height={100}
-							alt='Team Logo'
-							className='h-auto w-28 md:w-48 lg:w-72 xl:w-96'
-						/>
-					</Link>
-					<div className='text-lg font-extrabold text-center uppercase md:text-2xl lg:text-4xl xl:text-6xl'>
-						{useDateFormat(dates[0].date).seasonYear} Results
+				<Link
+					href={`/${id}`}
+					className='flex flex-col items-center gap-6 pb-6 border-b-4 justify-evenly sm:flex-row sm:gap-2 sm:px-4'>
+					<Image
+						src={logo.logoUrlPrimDrk(id)}
+						width={100}
+						height={100}
+						alt={`${clubName} Logo`}
+						className='w-1/3 h-auto max-w-xs min-w-[10rem] sm:w-1/4'
+					/>
+					<div className='flex items-center gap-2.5 sm:flex-col sm:gap-5 md:gap-6 lg:gap-7 xl:gap-8'>
+						<div className='text-2xl font-bold uppercase sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl'>
+							{franchiseName}
+						</div>
+						<div className='text-2xl font-bold uppercase sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl'>
+							{clubName}
+						</div>
 					</div>
-				</div>
+				</Link>
 				{dates.map((date, index) => {
-					const gameDate = date.games[0].gameDate
+					const {
+						games: [{ gamePk: gameId, gameDate }],
+					} = date
 					const isDoubleHeader = Boolean(date.totalGames > 1)
 
 					return (
-						<div
+						<Link
+							href={`/${id}/results/${gameId}`}
 							key={index}
-							className='flex items-center gap-4'>
+							className='flex items-center gap-4 p-4 border'>
 							<div>{useDateFormat(gameDate).gameDate}</div>
 							<div>→</div>
 							<div className='flex flex-col items-center gap-3'>
 								{renderGameInfo(date.games)}
 							</div>
-						</div>
+						</Link>
 					)
 				})}
 			</div>

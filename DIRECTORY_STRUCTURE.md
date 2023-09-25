@@ -3,24 +3,29 @@
 - .next
 - app
   - [teamId]
-    - roster
-      - [playerId]
+    - calendar
+      - page.jsx
+    - results
+      - [gameId]
         - page.jsx
       - page.jsx
-    - schedule
-      - [gameId]
+    - roster
+      - [playerId]
         - page.jsx
       - page.jsx
     - page.jsx
   - components
     - Navbar.jsx
+  - favicon.ico
   - globals.css
   - layout.jsx
   - page.jsx
+- data
+  - teams.json
 - lib
   - getMlbData.js
+  - getMonthScheduleData.js
 - node_modules
-- public
 - utils
   - request.rest
   - useBuildUrl.js

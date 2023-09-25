@@ -4,9 +4,9 @@ import { getTeams } from '@/lib/getMlbData'
 import * as logo from '@/utils/useMediaUrl'
 
 export default async function HomePage() {
-	const result = await getTeams()
+	const teamsResult = await getTeams()
 	
-	const { teams } = result
+	const { teams } = teamsResult
 	
 	teams.sort((a, b) => {
 		if (a.name < b.name) return -1
