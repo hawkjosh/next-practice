@@ -5,23 +5,28 @@
   - [teamId]
     - calendar
       - page.jsx
+      - TeamCalendarPage.jsx
     - results
       - [gameId]
+        - GameStatsPage.jsx
         - page.jsx
       - page.jsx
+      - TeamResultsPage.jsx
     - roster
       - [playerId]
         - page.jsx
+        - PlayerStatsPage.jsx
       - page.jsx
+      - TeamRosterPage.jsx
     - page.jsx
+    - TeamDashboardPage.jsx
   - components
     - Navbar.jsx
   - favicon.ico
   - globals.css
+  - HomePage.jsx
   - layout.jsx
   - page.jsx
-- data
-  - teams.json
 - lib
   - getMlbData.js
   - getMonthScheduleData.js
