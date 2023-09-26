@@ -27,12 +27,13 @@ export default async function HomePage() {
 							<Link
 								key={key}
 								href={`/${teamId}`}
-								className='relative flex items-center justify-center w-[5rem] transition-transform duration-500 rounded-full group bg-slate-500 aspect-square sm:w-[6rem] md:w-[6.5rem] xl:w-[7rem] hover:scale-125 hover:-translate-y-4'>
+								className='relative flex items-center justify-center w-[5rem] transition-transform duration-500 rounded-full group border border-slate-500 aspect-square sm:w-[6rem] md:w-[6.5rem] xl:w-[7rem] hover:scale-125 hover:-translate-y-4'>
 								<Image
 									src={logo.logoUrlCapLt(teamId)}
 									width={100}
 									height={100}
 									alt={`${teamName} Logo`}
+									priority
 									className='w-[3rem] transition-transform duration-500 aspect-square sm:w-[3.5rem] md:w-[4rem] xl:w-[4.5rem] group-hover:scale-110'
 								/>
 								<div className='absolute w-full text-xs text-center transition-opacity duration-500 -translate-x-1/2 opacity-0 -bottom-4 left-1/2 sm:-bottom-5 sm:text-sm xl:-bottom-6 xl:text-base group-hover:opacity-100'>

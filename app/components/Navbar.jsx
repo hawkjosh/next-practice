@@ -10,8 +10,8 @@ export default function Navbar() {
 					className='flex items-center w-full gap-4'>
 					<Image
 						src='https://www.mlbstatic.com/team-logos/league-on-dark/1.svg'
-						width={1}
-						height={1}
+						width={100}
+						height={100}
 						alt='MLB Logo'
 						priority
 						className='w-[6.5rem] h-auto'
