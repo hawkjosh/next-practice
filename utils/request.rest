@@ -98,3 +98,8 @@ GET https://statsapi.mlb.com/api/v1/game/717664/linescore
 # query_params  ->  ?personIds=<personIds>&hydrate=stats(group=[hitting],type=[statSplits],sitCodes=[vr,vl])
 #  ↓ ↓ ↓ EXAMPLE - Ronald Acuna Jr. ↓ ↓ ↓
 GET https://statsapi.mlb.com/api/v1/people?personIds=660670&hydrate=stats(group=[hitting,fielding],type=[statSplits],sitCodes=[vr,vl])
+
+
+###
+
+GET https://statsapi.mlb.com/api/v1/game/718361/boxscore?hydrate=hydrations

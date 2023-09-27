@@ -7,7 +7,7 @@ export default function Navbar() {
 			<div className='flex items-center justify-start w-full px-3 py-4 mx-auto gap-7 max-w-7xl'>
 				<Link
 					href='/'
-					className='flex items-center w-full gap-4'>
+					className='flex items-center gap-4 w-max group'>
 					<Image
 						src='https://www.mlbstatic.com/team-logos/league-on-dark/1.svg'
 						width={100}
@@ -16,7 +16,7 @@ export default function Navbar() {
 						priority
 						className='w-[6.5rem] h-auto'
 					/>
-					<div className='text-xl font-bold transition duration-300 hover:text-yellow-400 hover:scale-105'>
+					<div className='text-xl font-bold text-white transition duration-300 group-hover:text-yellow-400 group-hover:scale-105'>
 						MLB HQ
 					</div>
 				</Link>

@@ -4,10 +4,11 @@ import { getTeam } from '@/lib/getMlbData'
 import TeamPagesHeader from './components/TeamPagesHeader'
 
 export default async function TeamPagesLayout({ params, children }) {
-	const teamResult = await getTeam(params.teamId)
+	const teamId = params.teamId
+	const teamResult = await getTeam(teamId)
 
 	const {
-		teams: [{ id, franchiseName, clubName }],
+		teams: [{ id, clubName }],
 	} = teamResult
 
 	return (
@@ -15,7 +16,6 @@ export default async function TeamPagesLayout({ params, children }) {
 			<div className='flex flex-col w-11/12 gap-12 mx-auto'>
 				<TeamPagesHeader
 					id={id}
-					franchiseName={franchiseName}
 					clubName={clubName}
 				/>
 				{children}

@@ -10,8 +10,8 @@ export default async function GameStatsPage({ params }) {
 
 	const { innings, teams } = await getLinescore(gameId)
 
-	const homeWinner = Boolean(teams.home.isWinner)
-	const awayWinner = Boolean(teams.away.isWinner)
+	const homeWinner = Boolean(teams.home.runs > teams.away.runs)
+	const awayWinner = Boolean(teams.away.runs > teams.home.runs)
 
 	const {
 		teams: {
@@ -34,14 +34,16 @@ export default async function GameStatsPage({ params }) {
 		},
 	} = await getBoxscore(gameId)
 
+	console.log(homeTeam)
+
 	return (
 		<div className='flex flex-col gap-12 pb-4'>
 			{homeWinner ? (
-				<div className='text-3xl text-center font-bold sm:text-4xl md:text-5xl'>
+				<div className='text-3xl font-bold text-center sm:text-4xl md:text-5xl'>
 					{`${homeTeam} win ${homeOffense.runs} - ${awayOffense.runs}`}
 				</div>
 			) : awayWinner ? (
-				<div className='text-3xl text-center font-bold sm:text-4xl md:text-5xl'>
+				<div className='text-3xl font-bold text-center sm:text-4xl md:text-5xl'>
 					{`${awayTeam} win ${awayOffense.runs} - ${homeOffense.runs}`}
 				</div>
 			) : null}
@@ -57,7 +59,7 @@ export default async function GameStatsPage({ params }) {
 					awayRecord={{ awayWs, awayLs }}
 				/>
 			</div>
-			<div className='flex flex-col justify-evenly gap-16 sm:flex-row'>
+			<div className='flex flex-col gap-16 justify-evenly sm:flex-row'>
 				<div className='px-4 py-2 border-2 rounded-md'>
 					<OffensiveStats
 						homeTeam={homeTeam}
