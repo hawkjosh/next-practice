@@ -3,8 +3,8 @@ import Image from 'next/image'
 
 export default function Navbar() {
 	return (
-		<div className='sticky top-0 z-10 mb-10 bg-blue-500 border-b-2 border-gray-200'>
-			<div className='flex items-center justify-start w-full px-3 py-4 mx-auto gap-7 max-w-7xl'>
+		<div className='@container/nav sticky top-0 z-10 bg-[#696969] border-b-2 border-b-white'>
+			<div className='flex items-center justify-center w-full py-2 mx-auto gap-7 max-w-7xl md:justify-start md:ps-3 @[80.75rem]/nav:ps-0'>
 				<Link
 					href='/'
 					className='flex items-center gap-4 w-max group'>
@@ -16,7 +16,7 @@ export default function Navbar() {
 						priority
 						className='w-[6.5rem] h-auto'
 					/>
-					<div className='text-xl font-bold text-white transition duration-300 group-hover:text-yellow-400 group-hover:scale-105'>
+					<div className='text-xl font-bold text-white transition duration-300 group-hover:text-[#041e42] group-hover:scale-110 group-hover:font-extrabold'>
 						MLB HQ
 					</div>
 				</Link>

@@ -41,7 +41,7 @@ export default async function TeamResultsPage({ params }) {
 					return (
 						<div
 							key={index}
-							className='grid grid-rows-4 rounded-lg border border-[var(--color)] p-2 gap-2'>
+							className='grid grid-rows-4 gap-2 p-2 border rounded-lg'>
 							<div
 								className='row-start-1 row-end-2 font-semibold text-center sm:text-lg'>
 								{useDateFormat(gameDate).gameDate}
@@ -69,7 +69,7 @@ export default async function TeamResultsPage({ params }) {
 								/>
 							</div>
 							{isDoubleHeader && (
-								<div className='row-start-3 row-end-4 text-sm text-center italic font-bold text-[var(--color)]'>
+								<div className='row-start-3 row-end-4 text-sm italic font-bold text-center'>
 									(DH)
 								</div>
 							)}

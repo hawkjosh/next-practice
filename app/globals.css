@@ -3,13 +3,9 @@
 @tailwind utilities;
 
 :root {
-	--color: #3b82f6;
-  --fontColor: #faf0e6;
-  --borderColor: #778899;
-  --background: #b0c4de;
+  --white: #ffffff;
 }
 
 body {
-  background-color: var(--background);
-  color: var(--fontColor);
+  color: var(--white);
 }

@@ -15,19 +15,19 @@ export default async function HomePage() {
 	})
 
 	return (
-		<div className='container max-w-screen-xl mx-auto'>
-			<div className='flex flex-col items-center gap-8 mb-6 md:gap-10 xl:gap-12'>
+		<div className='py-4 min-h-screen bg-[#bababa]'>
+			<div className='@container/home flex flex-col items-center max-w-screen-xl gap-4 mb-4 mx-auto md:gap-6 xl:gap-8'>
 				<div className='text-2xl font-semibold md:text-3xl lg:text-4xl xl:text-5xl'>
 					Choose a team...
 				</div>
-				<div className='grid w-[70%] grid-cols-3 mx-auto gap-x-1.5 gap-y-9 grid-flow-dense place-items-center md:grid-cols-5 md:w-11/12 lg:grid-cols-6 md:gap-y-10'>
+				<div className='w-[95%] mx-auto grid grid-cols-3 place-items-center gap-y-9 @md/home:w-[85%] @lg/home:grid-cols-4 @3xl/home:w-[90%] @3xl/home:grid-cols-5 @3xl/home:gap-y-10 @5xl/home:w-[85%] @5xl/home:grid-cols-6'>
 					{teams.map((team, key) => {
 						const { id: teamId, clubName: teamName } = team
 						return (
 							<Link
 								key={key}
 								href={`/${teamId}`}
-								className='relative flex items-center justify-center w-[5rem] transition-all duration-500 rounded-full group border border-slate-500 aspect-square sm:w-[6rem] md:w-[6.5rem] xl:w-[7rem] hover:scale-125 hover:-translate-y-4 shadow-lg hover:shadow-2xl'>
+								className='relative flex items-center justify-center w-[5rem] transition-all duration-500 rounded-full group border border-[#696969] aspect-square sm:w-[6rem] md:w-[6.5rem] xl:w-[7rem] hover:scale-125 hover:-translate-y-4 shadow-lg hover:shadow-2xl bg-[var(--white)]'>
 								<Image
 									src={logo.logoUrlCapLt(teamId)}
 									width={100}

@@ -102,4 +102,9 @@ GET https://statsapi.mlb.com/api/v1/people?personIds=660670&hydrate=stats(group=
 
 ###
 
-GET https://statsapi.mlb.com/api/v1/game/718361/boxscore?hydrate=hydrations
+GET https://statsapi.mlb.com/api/v1/teams/144?hydrate=hydrations
+
+
+###
+
+GET https://statsapi.mlb.com/api/v1/teams?teamId=144&hydrate=deviceProperties

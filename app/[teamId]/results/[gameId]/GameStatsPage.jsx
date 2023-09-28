@@ -34,8 +34,6 @@ export default async function GameStatsPage({ params }) {
 		},
 	} = await getBoxscore(gameId)
 
-	console.log(homeTeam)
-
 	return (
 		<div className='flex flex-col gap-12 pb-4'>
 			{homeWinner ? (

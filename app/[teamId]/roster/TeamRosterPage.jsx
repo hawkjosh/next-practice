@@ -12,7 +12,7 @@ export default async function TeamRosterPage({ params }) {
 	)
 
 	return (
-		<div className='flex flex-col divide-y divide-[var(--borderColor)]'>
+		<div className='flex flex-col divide-y'>
 			{roster.map((player, index) => {
 				const {
 					person: { id: playerId, fullName: playerName },
