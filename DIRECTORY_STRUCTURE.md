@@ -4,20 +4,35 @@
 - app
   - [teamId]
     - calendar
+      - components
+        - TeamCalendar.jsx
+      - loading.jsx
       - page.jsx
       - TeamCalendarPage.jsx
+    - components
+      - TeamPagesHeader.jsx
     - results
       - [gameId]
+        - components
+          - Linescore.jsx
+        - loading.jsx
         - GameStatsPage.jsx
         - page.jsx
+      - components
+        - GameSummaryCard.jsx
+      - loading.jsx
       - page.jsx
       - TeamResultsPage.jsx
     - roster
       - [playerId]
+        - loading.jsx
         - page.jsx
         - PlayerStatsPage.jsx
+      - loading.jsx
       - page.jsx
       - TeamRosterPage.jsx
+    - layout.jsx
+    - loading.jsx
     - page.jsx
     - TeamDashboardPage.jsx
   - components
@@ -27,6 +42,8 @@
   - HomePage.jsx
   - layout.jsx
   - page.jsx
+- data
+  - statsapi_notes.md
 - lib
   - getMlbData.js
   - getMonthScheduleData.js
@@ -35,7 +52,8 @@
   - request.rest
   - useBuildUrl.js
   - useDateFormat.js
-  - useMediaUrl.js
+  - useMediaRender.js
+  - useStringFormat.js
 - .gitignore
 - jsconfig.json
 - next.config.js

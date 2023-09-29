@@ -4,7 +4,7 @@
 
 # PIN -> Use: <BASE_URL><endpoint><path_params><query_params>
 
-# NOTES -> GET All MLB Teams
+# NOTES -> GET all MLB teams info
 # endpoint      ->  teams
 # path_params   ->  n/a
 # query_params  ->  ?sportId=1
@@ -15,18 +15,18 @@ GET https://statsapi.mlb.com/api/v1/teams?sportId=1
 ###
 
 
-# NOTES -> GET Single MLB Team Info
+# NOTES -> GET single team info
 # endpoint      ->  teams
-# path_params   ->  /<teamId>
-# query_params  ->  n/a
+# path_params   ->  n/a
+# query_params  ->  ?teamId=<teamId>
 #  ↓ ↓ ↓ EXAMPLE - Atlanta Braves ↓ ↓ ↓
-Get https://statsapi.mlb.com/api/v1/teams/144
+Get https://statsapi.mlb.com/api/v1/teams?teamId=144
 
 
 ###
 
 
-# NOTES -> GET Single MLB Team Regular Season Schedule
+# NOTES -> GET team regular season schedule
 # endpoint      ->  schedule
 # path_params   ->  n/a
 # query_params  ->  ?sportId=1&season=<season>&gameType=R&teamId=<teamId>
@@ -37,7 +37,7 @@ Get https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2023&gameType=R&te
 ###
 
 
-# NOTES -> GET Single MLB Team Schedule by Month
+# NOTES -> GET team schedule by month
 # endpoint      ->  schedule
 # path_params   ->  n/a
 # query_params  ->  ?sportId=1&teamId=<teamId>&startDate=<startDate>&endDate=<endDate>
@@ -48,9 +48,9 @@ Get https://statsapi.mlb.com/api/v1/schedule?sportId=1&teamId=144&startDate=2023
 ###
 
 
-# NOTES -> GET Single MLB Team Roster
-# endpoint      ->  schedule
-# path_params   ->  teams/<teamId>/roster
+# NOTES -> GET team roster
+# endpoint      ->  teams
+# path_params   ->  /<teamId>/roster
 # query_params  ->  n/a
 #  ↓ ↓ ↓ EXAMPLE - Atlanta Braves ↓ ↓ ↓
 GET https://statsapi.mlb.com/api/v1/teams/144/roster
@@ -59,7 +59,7 @@ GET https://statsapi.mlb.com/api/v1/teams/144/roster
 ###
 
 
-# NOTES -> GET Single MLB Player Info
+# NOTES -> GET single player info
 # endpoint      ->  people
 # path_params   ->  /<personId>
 # query_params  ->  n/a
@@ -70,7 +70,7 @@ GET https://statsapi.mlb.com/api/v1/people/660670
 ###
 
 
-# NOTES -> GET MLB Game Box Score
+# NOTES -> GET game box score
 # endpoint      ->  game
 # path_params   ->  /<gamePk>/boxscore
 # query_params  ->  n/a
@@ -81,7 +81,7 @@ GET https://statsapi.mlb.com/api/v1/game/717664/boxscore
 ###
 
 
-# NOTES -> GET MLB Game Line Score
+# NOTES -> GET game line score
 # endpoint      ->  game
 # path_params   ->  /<gamePk>/linescore
 # query_params  ->  n/a
@@ -92,19 +92,52 @@ GET https://statsapi.mlb.com/api/v1/game/717664/linescore
 ###
 
 
-# NOTES -> ADVANCED USE CASE: GET Single MLB Player Hitting Stats Split B/W RHP & LHP
+# PIN -> ADVANCED USE CASE: GET single MLB player hitting stats split between RHP & LHP
 # endpoint      ->  people
 # path_params   ->  n/a
 # query_params  ->  ?personIds=<personIds>&hydrate=stats(group=[hitting],type=[statSplits],sitCodes=[vr,vl])
 #  ↓ ↓ ↓ EXAMPLE - Ronald Acuna Jr. ↓ ↓ ↓
-GET https://statsapi.mlb.com/api/v1/people?personIds=660670&hydrate=stats(group=[hitting,fielding],type=[statSplits],sitCodes=[vr,vl])
+GET https://statsapi.mlb.com/api/v1/people?personIds=660670&hydrate=stats(group=hitting,type=statSplits,sitCodes=[vr,vl])
+
+
+### PROTIP → Returns what hydrations are available for the teams endpoint (must include valid teamId parameter but does not matter which team, this one is for the Braves)
+GET https://statsapi.mlb.com/api/v1/teams?teamId=144&hydrate=hydrations&fields=teams,hydrations
+
+
+### PROTIP → Returns what hydrations are available for the schedule endpoint
+GET https://statsapi.mlb.com/api/v1/schedule?sportId=1&hydrate=hydrations&fields=hydrations
+
+
+### PROTIP → Returns what hydrations are available for a player (must include valid personIds parameter for this to work but does not matter who, this one is Ronald Acuna Jr.)
+GET https://statsapi.mlb.com/api/v1/people?personIds=660670&hydrate=hydrations&fields=hydrations
+
+
+### PROTIP → Returns device properties such as colors/fonts/images/etc. for a team (must include teamId parameter, this one is for the Braves)
+GET https://statsapi.mlb.com/api/v1/teams?teamId=144&hydrate=deviceProperties&fields=teams,deviceProperties
+
+
+### PROTIP → Returns player info and awards received by a player or players (must include at least one personIds parameter, this one is Ronald Acuna Jr.)
+GET https://statsapi.mlb.com/api/v1/people?personIds=660670&hydrate=awards
+
+
+### PROTIP → Returns player info and pitch arsenal stats for a player (must include at least one personIds parameter, this one is Spencer Stryder)
+GET https://statsapi.mlb.com/api/v1/people?personIds=675911&hydrate=stats(group=pitching,type=pitchArsenal)
+
+
+### PROTIP → Returns player stats for a specific game (must include personId and gamePk path parameters, this one is Ronald Acuna Jr. on 9/28/23)
+GET https://statsapi.mlb.com/api/v1/people/660670/stats/game/716399
 
 
 ###
 
-GET https://statsapi.mlb.com/api/v1/teams/144?hydrate=hydrations
+GET https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2023&gameType=R&teamId=144&hydrate=team&fields=dates,date,totalGames,games,gamePk,gameDate,rescheduleDate,status,detailedState,statusCode,reason,teams,away,home,leagueRecord,wins,losses,score,team,id,abbreviation,franchiseName,clubName,isWinner,venue,name,doubleHeader,dayNight,gamesInSeries,seriesGameNumber
 
 
 ###
 
-GET https://statsapi.mlb.com/api/v1/teams?teamId=144&hydrate=deviceProperties
+GET https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2023&gameType=R&teamId=144&hydrate=team&fields=dates,date,totalGames,games,gamePk,gameDate,rescheduleDate,status,abstractGameState,codedGameState,statusCode,abstractGameCode,detailedState,reason
+
+
+###
+
+GET https://statsapi.mlb.com/api/v1/teams?teamId=144&hydrate=deviceProperties,venue,springVenue,standings

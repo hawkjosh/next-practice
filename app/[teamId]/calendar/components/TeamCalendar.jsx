@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import * as logo from '@/utils/useMediaUrl'
+import { useMediaRender } from '@/utils/useMediaRender'
 
 export default function TeamCalendar({
 	calendarTitle,
@@ -34,19 +34,14 @@ export default function TeamCalendar({
 						</div>
 						{day.info && (
 							<div className='flex items-center justify-center h-full gap-1 p-3 md:gap-2'>
-								<div
-									className={`font-light text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl ${
-										day.info.homeId === parseInt(teamId)
-											? 'text-[lawngreen]'
-											: 'text-[crimson]'
-									}`}>
+								<div className='text-xs font-light sm:text-sm md:text-base lg:text-lg xl:text-xl'>
 									{day.info.homeId === parseInt(teamId) ? 'vs' : '@'}
 								</div>
 								<Image
 									src={
 										day.info.homeId === parseInt(teamId)
-											? logo.logoUrlCapDrk(day.info.awayId)
-											: logo.logoUrlCapDrk(day.info.homeId)
+											? useMediaRender(day.info.awayId).capDark
+											: useMediaRender(day.info.homeId).capDark
 									}
 									width={100}
 									height={100}

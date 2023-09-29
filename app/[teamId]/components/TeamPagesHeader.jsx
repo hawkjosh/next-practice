@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import * as logo from '@/utils/useMediaUrl'
+import { useMediaRender } from '@/utils/useMediaRender'
 import { usePathname } from 'next/navigation'
 import { useStringFormat } from '@/utils/useStringFormat'
 
@@ -10,20 +10,26 @@ export default function TeamPagesHeader({ teamId, teamName, clubName, color }) {
 	const pathname = usePathname()
 
 	return (
-		<div className='py-4'>
+		<div className='flex flex-col gap-8 py-4'>
 			{pathname.length > 4 ? (
 				<div className='flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-8'>
 					<Link href={`/${teamId}`}>
-					<Image
-						src={logo.logoUrlPrimDrk(teamId)}
-						width={100}
-						height={100}
-						alt={`${clubName} Logo`}
-						priority
-						className='h-[4rem] w-auto sm:h-[4.75rem] md:h-[5.5rem] lg:h-[6.25rem] xl:h-[7rem]'
-					/>
+						<Image
+							src={
+								teamId === '135'
+									? useMediaRender(teamId).primaryLight
+									: useMediaRender(teamId).primaryDark
+							}
+							width={100}
+							height={100}
+							alt={`${clubName} Logo`}
+							priority
+							className='h-[4rem] w-auto sm:h-[4.75rem] md:h-[5.5rem] lg:h-[6.25rem] xl:h-[7rem]'
+						/>
 					</Link>
-					<div style={{color: color}} className='flex items-center gap-2.5 sm:gap-3 md:gap-3.5 lg:gap-4 xl:gap-5'>
+					<div
+						style={{ color: color }}
+						className='flex items-center gap-2.5 sm:gap-3 md:gap-3.5 lg:gap-4 xl:gap-5'>
 						<div className='text-2xl font-bold uppercase sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl'>
 							{clubName}
 						</div>
@@ -37,18 +43,41 @@ export default function TeamPagesHeader({ teamId, teamName, clubName, color }) {
 			) : (
 				<div className='flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-8'>
 					<Image
-						src={logo.logoUrlPrimDrk(teamId)}
+						src={
+							teamId === '135'
+								? useMediaRender(teamId).primaryLight
+								: useMediaRender(teamId).primaryDark
+						}
 						width={100}
 						height={100}
 						alt={`${clubName} Logo`}
 						priority
 						className='h-[4rem] w-auto sm:h-[4.75rem] md:h-[5.5rem] lg:h-[6.25rem] xl:h-[7rem]'
 					/>
-					<div style={{color: color}} className='text-2xl font-bold uppercase sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl'>
-						{teamName}
+					<div
+						style={{ color: color }}
+						className='text-2xl font-bold uppercase sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl'>
+						{teamId === '114' ? 'cleveland guardians' : teamName}
 					</div>
 				</div>
 			)}
+			<div className='flex items-center w-full mx-auto justify-evenly sm:w-11/12 md:w-5/6 lg:w-3/4'>
+				<Link
+					href={`/${teamId}/roster`}
+					className='text-xl transition-transform hover:scale-125 hover:text-yellow-400 md:text-2xl xl:text-3xl'>
+					Roster
+				</Link>
+				<Link
+					href={`/${teamId}/calendar`}
+					className='text-xl transition-transform hover:scale-125 hover:text-yellow-400 md:text-2xl xl:text-3xl'>
+					Calendar
+				</Link>
+				<Link
+					href={`/${teamId}/results`}
+					className='text-xl transition-transform hover:scale-125 hover:text-yellow-400 md:text-2xl xl:text-3xl'>
+					Results
+				</Link>
+			</div>
 		</div>
 	)
 }

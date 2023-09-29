@@ -20,7 +20,7 @@ export default async function TeamCalendarPage({ params }) {
 			}
 		})
 	)
-
+	
 	return data.map((monthData, index) => (
 		<TeamCalendar
 			key={index}

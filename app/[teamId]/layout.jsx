@@ -15,39 +15,44 @@ export default async function TeamPagesLayout({ params, children }) {
 	} = await getTeam(teamId)
 
 	const {
-		bodyBackgroundColor: color,
 		basePalette: {
 			headerMastheadBackgroundColor: color1,
 			headerNavigationBackgroundColor: color2,
 			headerNavigationBorderColor: color3,
-			footerBackgroundColor: color4,
-			footerBorderColor: color5,
-			footerTextColor: color6,
-			footerTitleColor: color7,
-			headerMastheadTextColor: color8,
-			headerNavigationTextColor: color9,
-			pageContainerBackgroundColor: color10,
-			pageContainerBorderColor: color11,
+			footerTitleColor: color4,
 		},
 	} = style
 
 	return (
 		<div
-			style={{ background: color2 }}
+			style={{
+				background:
+					teamId === '135' || teamId === '137' || teamId === '146'
+						? color1
+						: color2,
+			}}
 			className='@container/main pb-4 min-h-screen'>
-			<div style={{background: color2, borderColor: color3}} className='border-b-4'>
+			<div
+				style={{
+					background:
+						teamId === '139' || teamId === '140' || teamId === '146'
+							? color3
+							: teamId === '135' || teamId === '137'
+							? color2
+							: color1,
+					borderColor: color4,
+				}}
+				className='border-b-4'>
 				<TeamPagesHeader
 					teamId={teamId}
 					teamName={teamNameDisplay}
 					clubName={clubName}
-					color={color3}
+					color={color4}
 				/>
 			</div>
-			{children}
+			<div className='flex flex-col items-center max-w-screen-xl gap-2 py-4 mx-auto'>
+				{children}
+			</div>
 		</div>
-		// <div className='container max-w-screen-xl mx-auto'>
-		// 	<div className='flex flex-col w-11/12 gap-12 mx-auto'>
-		// 	</div>
-		// </div>
 	)
 }

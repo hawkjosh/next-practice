@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { getSchedule } from '@/lib/getMlbData'
 import { useDateFormat } from '@/utils/useDateFormat'
-import * as logo from '@/utils/useMediaUrl'
+import { useMediaRender } from '@/utils/useMediaRender'
 
 // Components
 import GameSummaryCard from './components/GameSummaryCard'
@@ -51,7 +51,7 @@ export default async function TeamResultsPage({ params }) {
 									isDoubleHeader ? 'row-end-3' : 'row-end-4'
 								}`}>
 								<Image
-									src={logo.logoUrlCapLt(awayId)}
+									src={useMediaRender(awayId).capLight}
 									width={100}
 									height={100}
 									alt={`${awayTeam} Logo`}
@@ -60,7 +60,7 @@ export default async function TeamResultsPage({ params }) {
 								/>
 								<div className='font-bold sm:text-lg'>@</div>
 								<Image
-									src={logo.logoUrlCapLt(homeId)}
+									src={useMediaRender(homeId).capLight}
 									width={100}
 									height={100}
 									alt={`${homeTeam} Logo`}
