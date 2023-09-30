@@ -8,20 +8,21 @@ export default async function TeamPagesLayout({ params, children }) {
 	const {
 		teams: [
 			{
-				deviceProperties: { teamNameDisplay, style },
+				deviceProperties: {
+					teamNameDisplay,
+					style: {
+						basePalette: {
+							headerMastheadBackgroundColor: color1,
+							headerNavigationBackgroundColor: color2,
+							headerNavigationBorderColor: color3,
+							footerTitleColor: color4,
+						},
+					},
+				},
 				clubName,
 			},
 		],
 	} = await getTeam(teamId)
-
-	const {
-		basePalette: {
-			headerMastheadBackgroundColor: color1,
-			headerNavigationBackgroundColor: color2,
-			headerNavigationBorderColor: color3,
-			footerTitleColor: color4,
-		},
-	} = style
 
 	return (
 		<div

@@ -2,99 +2,119 @@ import { getTeam } from '@/lib/getMlbData'
 
 export default async function TeamDashboardPage({ params }) {
 	const teamId = params.teamId
-	const { teams } = await getTeam(teamId)
-
-	const [
-		{
-			springLeague: { name: springLeagueName },
-			venue: { name: stadiumName },
-			locationName,
-			firstYearOfPlay,
-			league: { name: leagueName },
-			division: { name: divisionName },
-			sport: { name: sportName },
-			franchiseName,
-			clubName,
-		},
-	] = teams
-	const [
-		{
-			springVenue: {
-				name: springStadiumName,
-				location: { city: springStadiumCity, stateAbbrev: springStadiumState },
-				fieldInfo: {
-					capacity: springStadiumCapacity,
-					turfType: springStadiumTurfType,
-					roofType: springStadiumRoofType,
+	const {
+		teams: [
+			{
+				springLeague: { name: springLeagueName },
+				venue: { name: stadiumName },
+				locationName,
+				firstYearOfPlay,
+				league: { name: leagueName },
+				division: { name: divisionName },
+				sport: { name: sportName },
+				franchiseName,
+				clubName,
+				springVenue: {
+					name: springStadiumName,
+					location: {
+						city: springStadiumCity,
+						stateAbbrev: springStadiumState,
+					},
+					fieldInfo: {
+						capacity: springStadiumCapacity,
+						turfType: springStadiumTurfType,
+						roofType: springStadiumRoofType,
+					},
+				},
+				record: {
+					streak: { streakCode },
+					divisionRank,
+					leagueRank,
+					sportRank,
+					gamesPlayed,
+					gamesBack,
+					wildCardGamesBack,
+					leagueGamesBack,
+					sportGamesBack,
+					divisionGamesBack,
+					leagueRecord: {
+						wins: leagueWins,
+						losses: leagueLosses,
+						pct: leaguePct,
+					},
+					records: {
+						splitRecords: [
+							{ wins: homeWins, losses: homeLosses, pct: homePct },
+							{ wins: awayWins, losses: awayLosses, pct: awayPct },
+							{ wins: leftWins, losses: leftLosses, pct: leftPct },
+							{ wins: leftHomeWins, losses: leftHomeLosses, pct: leftHomePct },
+							{ wins: leftAwayWins, losses: leftAwayLosses, pct: leftAwayPct },
+							{
+								wins: rightHomeWins,
+								losses: rightHomeLosses,
+								pct: rightHomePct,
+							},
+							{
+								wins: rightAwayWins,
+								losses: rightAwayLosses,
+								pct: rightAwayPct,
+							},
+							{ wins: rightWins, losses: rightLosses, pct: rightPct },
+							{ wins: lastTenWins, losses: lastTenLosses, pct: lastTenPct },
+							{
+								wins: extraInningWins,
+								losses: extraInningLosses,
+								pct: extraInningPct,
+							},
+							{ wins: oneRunWins, losses: oneRunLosses, pct: oneRunPct },
+							{ wins: winnersWins, losses: winnersLosses, pct: winnersPct },
+							{ wins: dayWins, losses: dayLosses, pct: dayPct },
+							{ wins: nightWins, losses: nightLosses, pct: nightPct },
+							{ wins: grassWins, losses: grassLosses, pct: grassPct },
+							{ wins: turfWins, losses: turfLosses, pct: turfPct },
+						],
+						divisionRecords: [
+							{
+								division: { name: divOneName },
+								wins: divOneWins,
+								losses: divOneLosses,
+								pct: divOnePct,
+							},
+							{
+								division: { name: divTwoName },
+								wins: divTwoWins,
+								losses: divTwoLosses,
+								pct: divTwoPct,
+							},
+							{
+								division: { name: divThreeName },
+								wins: divThreeWins,
+								losses: divThreeLosses,
+								pct: divThreePct,
+							},
+						],
+						leagueRecords: [
+							{
+								league: { name: leagueOneName },
+								wins: leagueOneWins,
+								losses: leagueOneLosses,
+								pct: leagueOnePct,
+							},
+							{
+								league: { name: leagueTwoName },
+								wins: leagueTwoWins,
+								losses: leagueTwoLosses,
+								pct: leagueTwoPct,
+							},
+						],
+					},
+					runsAllowed,
+					runsScored,
+					runDifferential,
 				},
 			},
-		},
-	] = teams
-	const [
-		{
-			record: {
-				streak: { streakCode },
-				divisionRank,
-				leagueRank,
-				sportRank,
-				gamesPlayed,
-				gamesBack,
-				wildCardGamesBack,
-				leagueGamesBack,
-				sportGamesBack,
-				divisionGamesBack,
-				leagueRecord: {
-					wins: leagueWins,
-					losses: leagueLosses,
-					pct: leaguePct,
-				},
-				records: { splitRecords, divisionRecords, leagueRecords },
-				runsAllowed,
-				runsScored,
-				runDifferential,
-			},
-		},
-	] = teams
-	const homeWins = splitRecords[0].wins
-	const homeLosses = splitRecords[0].losses
-	const homePct = splitRecords[0].pct
-	const awayWins = splitRecords[1].wins
-	const awayLosses = splitRecords[1].losses
-	const awayPct = splitRecords[1].pct
-	const dayWins = splitRecords[12].wins
-	const dayLosses = splitRecords[12].losses
-	const dayPct = splitRecords[12].pct
-	const nightWins = splitRecords[13].wins
-	const nightLosses = splitRecords[13].losses
-	const nightPct = splitRecords[13].pct
-	const grassWins = splitRecords[14].wins
-	const grassLosses = splitRecords[14].losses
-	const grassPct = splitRecords[14].pct
-	const turfWins = splitRecords[15].wins
-	const turfLosses = splitRecords[15].losses
-	const turfPct = splitRecords[15].pct
-
-	const divOneName = divisionRecords[0].division.name
-	const divOneWins = divisionRecords[0].wins
-	const divOneLosses = divisionRecords[0].losses
-	const divOnePct = divisionRecords[0].pct
-	const divTwoName = divisionRecords[1].division.name
-	const divTwoWins = divisionRecords[1].wins
-	const divTwoLosses = divisionRecords[1].losses
-	const divTwoPct = divisionRecords[1].pct
-	const divThreeName = divisionRecords[2].division.name
-	const divThreeWins = divisionRecords[2].wins
-	const divThreeLosses = divisionRecords[2].losses
-	const divThreePct = divisionRecords[2].pct
-
-	const leagueOneName = leagueRecords[0].league.name
-	const leagueOneWins = leagueRecords[0].wins
-	const leagueOneLosses = leagueRecords[0].losses
-	const leagueOnePct = leagueRecords[0].pct
-	const leagueTwoName = leagueRecords[1].league.name
-	const leagueTwoWins = leagueRecords[1].wins
-	const leagueTwoLosses = leagueRecords[1].losses
-	const leagueTwoPct = leagueRecords[1].pct
+		],
+	} = await getTeam(teamId)
 
 	return (
 		<div className='flex flex-col gap-1'>
@@ -133,24 +153,118 @@ export default async function TeamDashboardPage({ params }) {
 			<div>Run Differential: {runDifferential}</div>
 			<div className='flex flex-col'>
 				<div>Split Records</div>
-				<div className='flex gap-2 divide-x'>
-					<div className='ps-2'>
-						Home ({homePct}): {homeWins} - {homeLosses}
+				<div className='grid grid-cols-5'>
+					<div className='flex flex-col items-center gap-x-8'>
+						<span className='underline'>Home</span>
+						<span>
+							{homeWins} - {homeLosses}
+						</span>
+						<span>({homePct})</span>
 					</div>
-					<div className='ps-2'>
-						Away ({awayPct}): {awayWins} - {awayLosses}
+					<div className='flex flex-col items-center'>
+						<span className='underline'>Away</span>
+						<span>
+							{awayWins} - {awayLosses}
+						</span>
+						<span>({awayPct})</span>
 					</div>
-					<div className='ps-2'>
-						Day ({dayPct}): {dayWins} - {dayLosses}
+					<div className='flex flex-col items-center'>
+						<span className='underline'>Day</span>
+						<span>
+							{dayWins} - {dayLosses}
+						</span>
+						<span>({dayPct})</span>
 					</div>
-					<div className='ps-2'>
-						Night ({nightPct}): {nightWins} - {nightLosses}
+					<div className='flex flex-col items-center'>
+						<span className='underline'>Night</span>
+						<span>
+							{nightWins} - {nightLosses}
+						</span>
+						<span>({nightPct})</span>
 					</div>
-					<div className='ps-2'>
-						Grass ({grassPct}): {grassWins} - {grassLosses}
+					<div className='flex flex-col items-center'>
+						<span className='underline'>Grass</span>
+						<span>
+							{grassWins} - {grassLosses}
+						</span>
+						<span>({grassPct})</span>
 					</div>
-					<div className='ps-2'>
-						Turf ({turfPct}): {turfWins} - {turfLosses}
+					<div className='flex flex-col items-center'>
+						<span className='underline'>Turf</span>
+						<span>
+							{turfWins} - {turfLosses}
+						</span>
+						<span>({turfPct})</span>
+					</div>
+					<div className='flex flex-col items-center'>
+						<span className='underline'>LHP</span>
+						<span>
+							{leftWins} - {leftLosses}
+						</span>
+						<span>({leftPct})</span>
+					</div>
+					<div className='flex flex-col items-center'>
+						<span className='underline'>LHP Home</span>
+						<span>
+							{leftHomeWins} - {leftHomeLosses}
+						</span>
+						<span>({leftHomePct})</span>
+					</div>
+					<div className='flex flex-col items-center'>
+						<span className='underline'>LHP Away</span>
+						<span>
+							{leftAwayWins} - {leftAwayLosses}
+						</span>
+						<span>({leftAwayPct})</span>
+					</div>
+					<div className='flex flex-col items-center'>
+						<span className='underline'>RHP</span>
+						<span>
+							{rightWins} - {rightLosses}
+						</span>
+						<span>({rightPct})</span>
+					</div>
+					<div className='flex flex-col items-center'>
+						<span className='underline'>RHP Home</span>
+						<span>
+							{rightHomeWins} - {rightHomeLosses}
+						</span>
+						<span>({rightHomePct})</span>
+					</div>
+					<div className='flex flex-col items-center'>
+						<span className='underline'>RHP Away</span>
+						<span>
+							{rightAwayWins} - {rightAwayLosses}
+						</span>
+						<span>({rightAwayPct})</span>
+					</div>
+					<div className='flex flex-col items-center'>
+						<span className='underline'>Last10</span>
+						<span>
+							{lastTenWins} - {lastTenLosses}
+						</span>
+						<span>({lastTenPct})</span>
+					</div>
+					<div className='flex flex-col items-center'>
+						<span className='underline'>Xtras</span>
+						<span>
+							{extraInningWins} - {extraInningLosses}
+						</span>
+						<span>({extraInningPct})</span>
+					</div>
+					<div className='flex flex-col items-center'>
+						<span className='underline'>1-Run</span>
+						<span>
+							{oneRunWins} - {oneRunLosses}
+						</span>
+						<span>({oneRunPct})</span>
+					</div>
+					<div className='flex flex-col items-center'>
+						<span className='underline'>Winners</span>
+						<span>
+							{winnersWins} - {winnersLosses}
+						</span>
+						<span>({winnersPct})</span>
 					</div>
 				</div>
 			</div>
