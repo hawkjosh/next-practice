@@ -11,7 +11,6 @@
 #  ↓ ↓ ↓ EXAMPLE ↓ ↓ ↓
 GET https://statsapi.mlb.com/api/v1/teams?sportId=1
 
-
 ###
 
 
@@ -140,4 +139,11 @@ GET https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2023&gameType=R&te
 
 ###
 
+GET https://statsapi.mlb.com/api/v1/teams?teamId=144&hydrate=hydrations&fields=teams,hydrations
+
+###
+
 GET https://statsapi.mlb.com/api/v1/teams?teamId=144&hydrate=deviceProperties,venue,springVenue,standings
+
+###
+GET http://statsapi.mlb.com/api/v1/teams/144/roster/fullRoster?season=2023
