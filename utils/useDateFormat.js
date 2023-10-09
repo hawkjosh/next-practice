@@ -1,32 +1,17 @@
+import dayjs from 'dayjs'
+
 export const useDateFormat = (dateStr) => {
-	const seasonYear = new Date(dateStr).toLocaleDateString([], {
-		year: 'numeric',
-	})
+	const seasonYear = dayjs(dateStr).format('YYYY')
 
-	const monthDay = new Date(dateStr).toLocaleDateString([], {
-		month: 'numeric',
-		day: 'numeric',
-	})
+	const monthDay = dayjs(dateStr).format('M/D')
 
-	const calendarDay = new Date(dateStr).toLocaleDateString([], {
-		day: 'numeric',
-	})
+	const calendarDay = dayjs(dateStr).format('D')
 
-	const calendarTitle = new Date(dateStr).toLocaleDateString([], {
-		month: 'long',
-		year: 'numeric',
-	})
+	const calendarTitle = dayjs(dateStr).format('MMMM YYYY')
 
-	const gameDate = new Date(dateStr).toLocaleDateString('en-us', {
-		weekday: 'short',
-		month: 'short',
-		day: 'numeric',
-	})
+	const gameDate = dayjs(dateStr).format('ddd, MMM D')
 
-	const gameStart = new Date(dateStr).toLocaleTimeString([], {
-		hour: 'numeric',
-		minute: 'numeric',
-	})
+	const gameStart = dayjs(dateStr).format('h:mm A')
 
 	return {
 		seasonYear,

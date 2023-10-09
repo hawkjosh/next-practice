@@ -11,8 +11,6 @@ export default function SpringLeagueInfo({ springLeague, springVenue }) {
 
   const { name: springLeagueName } = springLeague
 
-  // console.log(springLeagueName)
-
 	return (
 		<div className='grid w-full grid-cols-6 gap-1 px-4 mx-auto lg:w-3/4'>
       <div className='col-span-6 mt-3 mb-2 text-2xl font-semibold uppercase'>Spring League Info:</div>
