@@ -146,14 +146,14 @@ export default function TeamRecords({ leagueName, records }) {
 
 	return (
 		<div className='flex flex-col w-full gap-4 px-4 mx-auto sm:gap-8 lg:w-3/4'>
-			<div className='grid grid-cols-12 gap-y-3 gap-x-3'>
-				<div className='col-span-12 mt-3 mb-2 text-2xl font-semibold uppercase'>
-					Split Records:
+			<div className='grid grid-cols-2'>
+				<div className='col-span-2 mt-3 mb-2 text-2xl font-semibold uppercase'>
+					League Records:
 				</div>
-				{splitRecordsData.map((record, index) => (
+				{leagueRecordsData.map((record, index) => (
 					<div
 						key={index}
-						className='flex flex-col items-center col-span-6 gap-[0.375rem] sm:col-span-3'>
+						className='flex flex-col col-span-1 items-center gap-[0.375rem]'>
 						<div className='flex items-center gap-3 border-b'>
 							<div className='text-lg'>{record.title}</div>
 							<div className='text-sm italic tracking-wider'>
@@ -186,14 +186,14 @@ export default function TeamRecords({ leagueName, records }) {
 					</div>
 				))}
 			</div>
-			<div className='grid grid-cols-2'>
-				<div className='col-span-2 mt-3 mb-2 text-2xl font-semibold uppercase'>
-					League Records:
+			<div className='grid grid-cols-12 gap-y-3 gap-x-3'>
+				<div className='col-span-12 mt-3 mb-2 text-2xl font-semibold uppercase'>
+					Split Records:
 				</div>
-				{leagueRecordsData.map((record, index) => (
+				{splitRecordsData.map((record, index) => (
 					<div
 						key={index}
-						className='flex flex-col col-span-1 items-center gap-[0.375rem]'>
+						className='flex flex-col items-center col-span-6 gap-[0.375rem] sm:col-span-3'>
 						<div className='flex items-center gap-3 border-b'>
 							<div className='text-lg'>{record.title}</div>
 							<div className='text-sm italic tracking-wider'>

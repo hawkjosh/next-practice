@@ -9,7 +9,7 @@ export default function Navbar() {
 					href='/'
 					className='flex items-center gap-4 w-max group'>
 					<Image
-						src='https://www.mlbstatic.com/team-logos/league-on-light/1.svg'
+						src='/mlb_logo.svg'
 						width={100}
 						height={100}
 						alt='MLB Logo'

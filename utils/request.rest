@@ -125,25 +125,3 @@ GET https://statsapi.mlb.com/api/v1/people?personIds=675911&hydrate=stats(group=
 
 ### PROTIP → Returns player stats for a specific game (must include personId and gamePk path parameters, this one is Ronald Acuna Jr. on 9/28/23)
 GET https://statsapi.mlb.com/api/v1/people/660670/stats/game/716399
-
-
-###
-
-GET https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2023&gameType=R&teamId=144&hydrate=team&fields=dates,date,totalGames,games,gamePk,gameDate,rescheduleDate,status,detailedState,statusCode,reason,teams,away,home,leagueRecord,wins,losses,score,team,id,abbreviation,franchiseName,clubName,isWinner,venue,name,doubleHeader,dayNight,gamesInSeries,seriesGameNumber
-
-
-###
-
-GET https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2023&gameType=R&teamId=144&hydrate=team&fields=dates,date,totalGames,games,gamePk,gameDate,rescheduleDate,status,abstractGameState,codedGameState,statusCode,abstractGameCode,detailedState,reason
-
-
-###
-
-GET https://statsapi.mlb.com/api/v1/teams?teamId=144&hydrate=hydrations&fields=teams,hydrations
-
-###
-
-GET https://statsapi.mlb.com/api/v1/teams?teamId=144&hydrate=deviceProperties,venue,springVenue,standings
-
-###
-GET http://statsapi.mlb.com/api/v1/teams/144/roster/fullRoster?season=2023

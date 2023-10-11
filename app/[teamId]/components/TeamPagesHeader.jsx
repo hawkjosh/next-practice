@@ -63,20 +63,20 @@ export default function TeamPagesHeader({ teamId, teamName, clubName, color }) {
 			)}
 			<div className='flex items-center w-full mx-auto justify-evenly sm:w-11/12 md:w-5/6 lg:w-3/4'>
 				<Link
-					href={`/${teamId}/roster`}
-					className='text-xl transition-transform hover:scale-125 hover:text-yellow-400 md:text-2xl xl:text-3xl'>
-					Roster
-				</Link>
-				<Link
 					href={`/${teamId}/calendar`}
 					className='text-xl transition-transform hover:scale-125 hover:text-yellow-400 md:text-2xl xl:text-3xl'>
 					Calendar
 				</Link>
 				<Link
+					href={`/${teamId}/roster`}
+					className='text-xl transition-transform hover:scale-125 hover:text-yellow-400 md:text-2xl xl:text-3xl'>
+					Roster
+				</Link>
+				{/* <Link
 					href={`/${teamId}/results`}
 					className='text-xl transition-transform hover:scale-125 hover:text-yellow-400 md:text-2xl xl:text-3xl'>
 					Results
-				</Link>
+				</Link> */}
 			</div>
 		</div>
 	)
