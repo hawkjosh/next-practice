@@ -62,6 +62,7 @@ export default function TeamRecords({ leagueName, records }) {
 		{ title: 'Grass', wins: grassWins, losses: grassLosses, pct: grassPct },
 		{ title: 'Turf', wins: turfWins, losses: turfLosses, pct: turfPct },
 		{ title: 'LHP', wins: leftWins, losses: leftLosses, pct: leftPct },
+		{ title: 'RHP', wins: rightWins, losses: rightLosses, pct: rightPct },
 		{
 			title: 'LHP-H',
 			wins: leftHomeWins,
@@ -74,7 +75,6 @@ export default function TeamRecords({ leagueName, records }) {
 			losses: leftAwayLosses,
 			pct: leftAwayPct,
 		},
-		{ title: 'RHP', wins: rightWins, losses: rightLosses, pct: rightPct },
 		{
 			title: 'RHP-H',
 			wins: rightHomeWins,
@@ -145,17 +145,18 @@ export default function TeamRecords({ leagueName, records }) {
 	]
 
 	return (
-		<div className='flex flex-col w-full gap-4 px-4 mx-auto sm:gap-8 lg:w-3/4'>
-			<div className='grid grid-cols-2'>
-				<div className='col-span-2 mt-3 mb-2 text-2xl font-semibold uppercase'>
-					League Records:
+		<div className='flex flex-col items-center w-full gap-4 px-4 mx-auto sm:gap-8 lg:w-3/4'>
+			<div className='text-2xl font-bold uppercase'>Season Records</div>
+			<div className='grid grid-cols-2 gap-x-8'>
+				<div className='col-span-2 mt-3 mb-2 text-xl font-semibold uppercase text-center'>
+					League:
 				</div>
 				{leagueRecordsData.map((record, index) => (
 					<div
 						key={index}
-						className='flex flex-col col-span-1 items-center gap-[0.375rem]'>
+						className='flex flex-col col-span-2 items-center gap-[0.375rem] sm:col-span-1'>
 						<div className='flex items-center gap-3 border-b'>
-							<div className='text-lg'>{record.title}</div>
+							<div className='text-lg font-light'>{record.title}</div>
 							<div className='text-sm italic tracking-wider'>
 								({record.pct})
 							</div>
@@ -166,16 +167,16 @@ export default function TeamRecords({ leagueName, records }) {
 					</div>
 				))}
 			</div>
-			<div className='grid grid-cols-3'>
-				<div className='col-span-3 mt-3 mb-2 text-2xl font-semibold uppercase'>
-					Division Records:
+			<div className='grid grid-cols-3 gap-x-8'>
+				<div className='col-span-3 mt-3 mb-2 text-xl font-semibold uppercase text-center'>
+					Division:
 				</div>
 				{divRecordsData.map((record, index) => (
 					<div
 						key={index}
 						className='flex flex-col col-span-3 items-center gap-[0.375rem] sm:col-span-1'>
 						<div className='flex items-center gap-3 border-b'>
-							<div className='text-lg'>{record.title}</div>
+							<div className='text-lg font-light'>{record.title}</div>
 							<div className='text-sm italic tracking-wider'>
 								({record.pct})
 							</div>
@@ -187,15 +188,15 @@ export default function TeamRecords({ leagueName, records }) {
 				))}
 			</div>
 			<div className='grid grid-cols-12 gap-y-3 gap-x-3'>
-				<div className='col-span-12 mt-3 mb-2 text-2xl font-semibold uppercase'>
-					Split Records:
+				<div className='col-span-12 mt-3 mb-2 text-xl font-semibold uppercase text-center'>
+					Splits:
 				</div>
 				{splitRecordsData.map((record, index) => (
 					<div
 						key={index}
 						className='flex flex-col items-center col-span-6 gap-[0.375rem] sm:col-span-3'>
 						<div className='flex items-center gap-3 border-b'>
-							<div className='text-lg'>{record.title}</div>
+							<div className='text-lg font-light'>{record.title}</div>
 							<div className='text-sm italic tracking-wider'>
 								({record.pct})
 							</div>

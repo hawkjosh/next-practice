@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { getPlayer } from '@/lib/getMlbData'
-import { useMediaRender } from '@/utils/useMediaRender'
+import { useMedia } from '@/utils/useMedia'
 
 export default async function PlayerStatsPage({ params }) {
 	const playerId = params.playerId
@@ -17,7 +17,7 @@ export default async function PlayerStatsPage({ params }) {
 	return (
 		<div className='flex flex-col items-center gap-4 pb-4'>
 			<Image
-				src={useMediaRender(playerId).headshot}
+				src={useMedia(playerId).headshot}
 				width={100}
 				height={100}
 				alt={`${playerName} Headshot`}

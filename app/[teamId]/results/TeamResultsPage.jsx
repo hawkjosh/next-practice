@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { getSchedule } from '@/lib/getMlbData'
-import { useDateFormat } from '@/utils/useDateFormat'
-import { useMediaRender } from '@/utils/useMediaRender'
+import { useDate } from '@/utils/useDate'
+import { useMedia } from '@/utils/useMedia'
 
 // Components
 import GameSummaryCard from './components/GameSummaryCard'
@@ -42,16 +42,15 @@ export default async function TeamResultsPage({ params }) {
 						<div
 							key={index}
 							className='grid grid-rows-4 gap-2 p-2 border rounded-lg'>
-							<div
-								className='row-start-1 row-end-2 font-semibold text-center sm:text-lg'>
-								{useDateFormat(gameDate).gameDate}
+							<div className='row-start-1 row-end-2 font-semibold text-center sm:text-lg'>
+								{useDate(gameDate).gameDate}
 							</div>
 							<div
 								className={`flex items-center justify-center row-start-2 gap-3 ${
 									isDoubleHeader ? 'row-end-3' : 'row-end-4'
 								}`}>
 								<Image
-									src={useMediaRender(awayId).capLight}
+									src={useMedia(awayId).logo('cap', 'light')}
 									width={100}
 									height={100}
 									alt={`${awayTeam} Logo`}
@@ -60,7 +59,7 @@ export default async function TeamResultsPage({ params }) {
 								/>
 								<div className='font-bold sm:text-lg'>@</div>
 								<Image
-									src={useMediaRender(homeId).capLight}
+									src={useMedia(homeId).logo('cap', 'light')}
 									width={100}
 									height={100}
 									alt={`${homeTeam} Logo`}

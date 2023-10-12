@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { getRoster } from '@/lib/getMlbData'
-import { useMediaRender } from '@/utils/useMediaRender'
+import { useMedia } from '@/utils/useMedia'
 
 export default async function TeamRosterPage({ params }) {
 	const teamId = params.teamId
@@ -26,7 +26,7 @@ export default async function TeamRosterPage({ params }) {
 						href={`/${teamId}/roster/${playerId}`}
 						className='flex items-center gap-4 py-4 sm:gap-5 md:gap-6 lg:gap-7 xl:gap-8'>
 						<Image
-							src={useMediaRender(playerId).headshot}
+							src={useMedia(playerId).headshot}
 							width={100}
 							height={100}
 							alt={`${playerName} Headshot`}

@@ -45,7 +45,7 @@ export default async function TeamDashboardPage({ params }) {
 				records={records}
 			/>
 
-			<SpringLeagueInfo
+			{/* <SpringLeagueInfo
 				springLeague={springLeague}
 				springVenue={springVenue}
 			/>
@@ -127,7 +127,7 @@ export default async function TeamDashboardPage({ params }) {
 						<strong className='text-lg'>{firstYearOfPlay}</strong>
 					</div>
 				</div>
-			</div>
+			</div> */}
 		</div>
 	)
 }
