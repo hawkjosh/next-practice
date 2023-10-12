@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 
-export const useDateFormat = (dateStr) => {
+export const useDate = (dateStr) => {
 	const seasonYear = dayjs(dateStr).format('YYYY')
 
 	const monthDay = dayjs(dateStr).format('M/D')
@@ -13,6 +13,12 @@ export const useDateFormat = (dateStr) => {
 
 	const gameStart = dayjs(dateStr).format('h:mm A')
 
+	const calendarStart = dayjs(dateStr).startOf('month')
+
+	const calendarEnd = dayjs(dateStr).endOf('month')
+
+	const firstDay = dayjs(dateStr).startOf('month').day()
+
 	return {
 		seasonYear,
 		monthDay,
@@ -20,5 +26,8 @@ export const useDateFormat = (dateStr) => {
 		calendarTitle,
 		gameDate,
 		gameStart,
+		calendarStart,
+		calendarEnd,
+		firstDay,
 	}
 }

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Image from 'next/image'
-import { useMediaRender } from '@/utils/useMediaRender'
+import { useMedia } from '@/utils/useMedia'
 
 export default function Linescore({
 	innings,
@@ -21,8 +21,8 @@ export default function Linescore({
 
 	const { awayWs, awayLs } = awayRecord
 
-	const awayLogo = useMediaRender(awayId).capLight
-	const homeLogo = useMediaRender(homeId).capLight
+	const awayLogo = useMedia(awayId).logo('cap', 'light')
+	const homeLogo = useMedia(homeId).logo('cap', 'light')
 
 	const logoHeight = 'clamp(2.5rem, 0.705rem + 6.711vw, 5rem)'
 	const rowHeight = 'clamp(3rem, 0.846rem + 8.054vw, 6rem)'

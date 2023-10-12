@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useMediaRender } from '@/utils/useMediaRender'
+import { useMedia } from '@/utils/useMedia'
 import { usePathname } from 'next/navigation'
 import { useStringFormat } from '@/utils/useStringFormat'
 
@@ -17,8 +17,8 @@ export default function TeamPagesHeader({ teamId, teamName, clubName, color }) {
 						<Image
 							src={
 								teamId === '135'
-									? useMediaRender(teamId).primaryLight
-									: useMediaRender(teamId).primaryDark
+									? useMedia(teamId).logo('primary', 'light')
+									: useMedia(teamId).logo('primary', 'dark')
 							}
 							width={100}
 							height={100}
@@ -45,8 +45,8 @@ export default function TeamPagesHeader({ teamId, teamName, clubName, color }) {
 					<Image
 						src={
 							teamId === '135'
-								? useMediaRender(teamId).primaryLight
-								: useMediaRender(teamId).primaryDark
+								? useMedia(teamId).logo('primary', 'light')
+								: useMedia(teamId).logo('primary', 'dark')
 						}
 						width={100}
 						height={100}
@@ -62,6 +62,13 @@ export default function TeamPagesHeader({ teamId, teamName, clubName, color }) {
 				</div>
 			)}
 			<div className='flex items-center w-full mx-auto justify-evenly sm:w-11/12 md:w-5/6 lg:w-3/4'>
+				{pathname.length > 4 && (
+					<Link
+						href={`/${teamId}`}
+						className='text-xl transition-transform hover:scale-125 hover:text-yellow-400 md:text-2xl xl:text-3xl'>
+						{clubName} HQ
+					</Link>
+				)}
 				<Link
 					href={`/${teamId}/calendar`}
 					className='text-xl transition-transform hover:scale-125 hover:text-yellow-400 md:text-2xl xl:text-3xl'>

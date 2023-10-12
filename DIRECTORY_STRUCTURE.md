@@ -51,8 +51,8 @@
 - utils
   - request.rest
   - useBuildUrl.js
-  - useDateFormat.js
-  - useMediaRender.js
+  - useDate.js
+  - useMedia.js
   - useStringFormat.js
 - .gitignore
 - jsconfig.json

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { getTeams } from '@/lib/getMlbData'
-import { useMediaRender } from '@/utils/useMediaRender'
+import { useMedia } from '@/utils/useMedia'
 
 export default async function HomePage() {
 	const { teams } = await getTeams()
@@ -27,7 +27,7 @@ export default async function HomePage() {
 								href={`/${teamId}`}
 								className='relative flex items-center justify-center w-[5rem] transition-all duration-500 rounded-full group border border-[#696969] aspect-square sm:w-[6rem] md:w-[6.5rem] xl:w-[7rem] hover:scale-125 hover:-translate-y-4 shadow-lg hover:shadow-2xl bg-[var(--white)]'>
 								<Image
-									src={useMediaRender(teamId).capLight}
+									src={useMedia(teamId).logo('cap', 'light')}
 									width={100}
 									height={100}
 									alt={`${teamName} Logo`}

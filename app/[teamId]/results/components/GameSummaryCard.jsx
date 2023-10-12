@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useDateFormat } from '@/utils/useDateFormat'
+import { useDate } from '@/utils/useDate'
 
 export default function GameSummaryCard({ teamId, games }) {
 	return games.map((game, index) => {
@@ -37,15 +37,15 @@ export default function GameSummaryCard({ teamId, games }) {
 				{isPostponed ? (
 					<div className='flex flex-col gap-1 px-2 py-1 text-center text-red-600 bg-yellow-400 cursor-default rounded-2xl group'>
 						<div className='text-sm font-bold md:text-base xl:text-lg group-hover:hidden'>
-							Rain Out
+							Rescheduled...
 						</div>
-						<div className='hidden text-sm font-bold md:text-base xl:text-lg group-hover:block'>{`Moved to ${
-							useDateFormat(rescheduleDate).monthDay
+						<div className='hidden text-sm font-bold md:text-base xl:text-lg group-hover:block'>{`${
+							useDate(rescheduleDate).gameDate
 						}`}</div>
 					</div>
 				) : isScheduled ? (
 					<div className='sm:text-lg lg:text-xl'>
-						{useDateFormat(gameDate).gameStart}
+						{useDate(gameDate).gameStart}
 					</div>
 				) : (
 					<Link
