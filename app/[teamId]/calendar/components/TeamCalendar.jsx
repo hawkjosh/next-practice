@@ -57,38 +57,41 @@ export default function TeamCalendar({
           return (
             <div
               key={index}
-              className="relative -mb-[1px] -mr-[1px] flex h-16 items-end justify-center border md:h-20 lg:h-24 xl:h-28"
+              className="relative -mb-0.5 -mr-0.5 h-16 border-2 border-slate-500 bg-slate-100 md:h-20 lg:h-24 xl:h-28"
             >
-              <div className="absolute right-[5%] top-[2.5%] text-xs md:text-sm xl:text-base">
+              <div className="absolute right-[5%] top-[2.5%] text-xs md:text-sm xl:text-base text-slate-500">
                 {day.date}
               </div>
               {day.info && (
                 <Link
                   href={`/${teamId}/calendar/${gameIds}`}
-                  className="flex flex-col h-full w-full items-center gap-1 pt-5"
+                  className="flex h-full w-full items-center justify-center"
                 >
                   <div className='flex items-center justify-center gap-1 md:gap-2'>
-                  	<div className="text-xs font-light sm:text-sm md:text-base lg:text-lg xl:text-xl">
-	                    {day.info.homeId === parseInt(teamId) ? "vs" : "@"}
-	                  </div>
-	                  <Image
-	                    src={
-	                      day.info.homeId === parseInt(teamId)
-	                        ? useMedia(day.info.awayId).logo("cap", "dark")
-	                        : useMedia(day.info.homeId).logo("cap", "dark")
-	                    }
-	                    width={100}
-	                    height={100}
-	                    alt="team logo"
-	                    priority
-	                    className="aspect-square w-4 sm:w-6 md:w-8 lg:w-10 xl:w-12"
-	                  />
+                    <div className="text-xs font-light sm:text-sm md:text-base lg:text-lg xl:text-xl text-slate-500 font-semibold">
+                      {day.info.homeId === parseInt(teamId) ? "vs" : "@"}
+                    </div>
+                    <Image
+                      src={
+                        day.info.homeId === parseInt(teamId)
+                          ? useMedia(day.info.awayId).logo("cap", "light")
+                          : useMedia(day.info.homeId).logo("cap", "light")
+                      }
+                      width={100}
+                      height={100}
+                      alt="team logo"
+                      priority
+                      className="aspect-square w-4 sm:w-6 md:w-8 lg:w-10 xl:w-12"
+                    />
                   </div>
-                  {/* <div className="absolute bottom-0 p-[2px] text-[0.625rem] font-semibold sm:text-sm">
-                    {day.info.gameIdGm2 ? `DH: ${result}|${resultGm2}` : result}
-                  </div> */}
-									<ResultsBadge result={result} gameIdGm2={day.info.gameIdGm2} resultGm2={resultGm2} isComplete={day.info.homeWin} />
-
+                  <div className="absolute left-[5%] top-0 p-[2px] text-xs font-extrabold sm:text-sm text-slate-500">
+                    {day.info.gameIdGm2 ? "DH" : null}
+                  </div>
+                  <ResultsBadge
+                    result={result}
+                    gameIdGm2={day.info.gameIdGm2}
+                    resultGm2={resultGm2}
+                  />
                 </Link>
               )}
             </div>
