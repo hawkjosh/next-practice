@@ -1,6 +1,4 @@
 import { getMonthScheduleData } from '@/lib/getMonthScheduleData'
-
-// Components
 import TeamCalendar from './components/TeamCalendar'
 
 export default async function TeamCalendarPage({ params }) {
@@ -20,7 +18,7 @@ export default async function TeamCalendarPage({ params }) {
 			}
 		})
 	)
-	
+
 	return data.map((monthData, index) => (
 		<TeamCalendar
 			key={index}

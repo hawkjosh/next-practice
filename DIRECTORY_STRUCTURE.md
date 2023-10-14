@@ -53,7 +53,6 @@
   - useBuildUrl.js
   - useDate.js
   - useMedia.js
-  - useStringFormat.js
 - .gitignore
 - jsconfig.json
 - next.config.js

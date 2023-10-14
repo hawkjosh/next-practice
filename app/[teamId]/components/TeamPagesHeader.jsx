@@ -4,7 +4,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useMedia } from '@/utils/useMedia'
 import { usePathname } from 'next/navigation'
-import { useStringFormat } from '@/utils/useStringFormat'
 
 export default function TeamPagesHeader({ teamId, teamName, clubName, color }) {
 	const pathname = usePathname()
@@ -36,7 +35,7 @@ export default function TeamPagesHeader({ teamId, teamName, clubName, color }) {
 						<div className='text-2xl font-bold uppercase sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl'>
 							{pathname === `/${teamId}`
 								? 'dashboard'
-								: useStringFormat(pathname).convertPathname}
+								: pathname.replace(`/${teamId}/`, '')}
 						</div>
 					</div>
 				</div>
@@ -79,11 +78,6 @@ export default function TeamPagesHeader({ teamId, teamName, clubName, color }) {
 					className='text-xl transition-transform hover:scale-125 hover:text-yellow-400 md:text-2xl xl:text-3xl'>
 					Roster
 				</Link>
-				{/* <Link
-					href={`/${teamId}/results`}
-					className='text-xl transition-transform hover:scale-125 hover:text-yellow-400 md:text-2xl xl:text-3xl'>
-					Results
-				</Link> */}
 			</div>
 		</div>
 	)
