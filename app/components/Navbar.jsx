@@ -22,7 +22,7 @@ export default function Navbar() {
 						className='w-[6.5rem] h-auto'
 					/>
 					<div className='text-xl font-bold text-white transition duration-300 group-hover:text-[#041e42] group-hover:scale-110 group-hover:font-extrabold'>
-						{pathname !== '/' ? 'All Teams' : 'MY MLB HQ'}
+						{pathname !== '/' ? 'Return to All Teams' : 'MY MLB HQ'}
 					</div>
 				</Link>
 			</div>

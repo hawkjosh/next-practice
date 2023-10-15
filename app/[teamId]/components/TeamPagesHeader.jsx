@@ -34,9 +34,16 @@ export default function TeamPagesHeader({ teamId, teamName, clubName, color }) {
               {clubName}
             </div>
             <div className="text-2xl font-bold uppercase sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
+              {/* {pathname === `/${teamId}`
+                ? "dashboard"
+                : pathname.replace(`/${teamId}/`, "")} */}
               {pathname === `/${teamId}`
                 ? "dashboard"
-                : pathname.replace(`/${teamId}/`, "")}
+                : pathname.includes("calendar")
+                ? "schedule"
+                : pathname.includes("roster")
+                ? "roster"
+                : null}
             </div>
           </div>
         </div>
