@@ -1,4 +1,3 @@
-import { twMerge } from "tailwind-merge";
 import Link from "next/link";
 import Image from "next/image";
 import { useMedia } from "@/utils/useMedia";
