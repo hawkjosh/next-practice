@@ -36,3 +36,6 @@ next-env.d.ts
 
 # workspace settings
 .vscode/*
+
+# other
+utils/statsapi_notes.md
