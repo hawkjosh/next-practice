@@ -68,7 +68,7 @@ export default function TeamCalendar({
                   className="flex h-full w-full items-center justify-center"
                 >
                   <div className='flex items-center justify-center gap-1 md:gap-2'>
-                    <div className="text-xs font-light sm:text-sm md:text-base lg:text-lg xl:text-xl text-slate-500 font-semibold">
+                    <div className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-slate-500 font-semibold">
                       {day.info.homeId === parseInt(teamId) ? "vs" : "@"}
                     </div>
                     <Image
