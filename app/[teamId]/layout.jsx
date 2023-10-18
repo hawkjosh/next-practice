@@ -43,7 +43,7 @@ export default async function TeamPagesLayout({ params, children }) {
 							: color1,
 					borderColor: color4,
 				}}
-				className='border-b-4'>
+				className='sticky border-b-4 top-[4.5rem] z-10'>
 				<TeamPagesHeader
 					teamId={teamId}
 					teamName={teamNameDisplay}
