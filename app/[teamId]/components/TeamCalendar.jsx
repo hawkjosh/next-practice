@@ -63,7 +63,8 @@ export default function TeamCalendar({
               </div>
               {day.info && (
                 <Link
-                  href={`/${teamId}/calendar/${gameIds}`}
+                  // href={`/${teamId}/calendar/${gameIds}`}
+                  href={`/${teamId}/${gameIds}`}
                   className="flex items-center justify-center w-full h-full"
                 >
                   <div className="flex items-center justify-center gap-1 md:gap-2">
