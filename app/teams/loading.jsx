@@ -1,7 +1,7 @@
 export default function Loading() {
   return (
-    <div className="flex items-center justify-center mt-12">
-      <div className="p-4 text-3xl text-center border rounded-md">
+    <div className="mt-12 flex items-center justify-center">
+      <div className="rounded-md border border-[red] p-4 text-center text-3xl text-[red]">
         Loading...
       </div>
     </div>

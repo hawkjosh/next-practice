@@ -39,7 +39,7 @@ export default function TeamNavbar({
           />
           <div
             style={{ color: color4 }}
-            className="text-2xl font-bold uppercase md:text-3xl lg:text-5xl xl:text-6xl"
+            className="text-xl font-bold uppercase sm:text-2xl md:text-3xl lg:text-5xl xl:text-6xl"
           >
             {teamId === "114" ? "cleveland guardians" : teamName}
           </div>
