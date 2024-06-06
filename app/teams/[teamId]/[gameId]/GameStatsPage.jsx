@@ -13,9 +13,12 @@ export default async function GameStatsPage({ params }) {
         getBoxscore(gameId),
       ]);
 
-      const gameDate = await getGameDate(gameId);
+      const gameDateInfo = await getGameDate(gameId);
 
-      return { linescore, boxscore, gameDate };
+      const gameDate = gameDateInfo.dates[0].games[0].gameDate;
+      const gameStatus = gameDateInfo.dates[0].games[0].status.detailedState;
+
+      return { linescore, boxscore, gameDate, gameStatus };
     }),
   );
 
@@ -39,11 +42,11 @@ export default async function GameStatsPage({ params }) {
 
         return (
           <div key={index} className="flex flex-col gap-10">
-            <>
+            {game.gameStatus !== "Scheduled" && (
               <div className="text-3xl font-bold text-center sm:text-4xl md:text-5xl">
                 {`${winningTeam} win ${winningRuns} - ${losingRuns}`}
               </div>
-            </>
+            )}
             <Linescore
               innings={innings}
               teams={teams}

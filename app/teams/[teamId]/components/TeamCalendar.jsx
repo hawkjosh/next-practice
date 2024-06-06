@@ -36,19 +36,21 @@ export default function TeamCalendar({
           }
 
           let result = null;
-          if (day.info) {
+          if (day.info && !day.info.isFutureGame && !day.info.rescheduled) {
             const winningTeam = day.info.homeWin
               ? day.info.homeId
               : day.info.awayId;
-            winningTeam === parseInt(teamId) ? (result = "W") : (result = "L");
+            winningTeam === parseInt(teamId)
+              ? (result = "W")
+              : (result = "L");
           }
 
           let resultGm2 = null;
-          if (day.info && day.info.gameIdGm2) {
-            const winningTeam = day.info.homeWinGm2
+          if (day.info && day.info.gameIdGm2 && !day.info.isFutureGameGm2 && !day.info.rescheduledGm2) {
+            const winningTeamGm2 = day.info.homeWinGm2
               ? day.info.homeId
               : day.info.awayId;
-            winningTeam === parseInt(teamId)
+            winningTeamGm2 === parseInt(teamId)
               ? (resultGm2 = "W")
               : (resultGm2 = "L");
           }
@@ -63,7 +65,9 @@ export default function TeamCalendar({
               </div>
               {day.info && (
                 <Link
-                  href={day.info.rescheduled ? '#' : `/teams/${teamId}/${gameIds}`}
+                  href={
+                    day.info.isFutureGame || day.info.rescheduled ? "javascript:void(0)" : `/teams/${teamId}/${gameIds}`
+                  }
                   className="flex items-center justify-center w-full h-full"
                 >
                   <div className="flex items-center justify-center gap-1 md:gap-2">
@@ -87,12 +91,18 @@ export default function TeamCalendar({
                     {day.info.gameIdGm2 ? "DH" : null}
                   </div>
                   <ResultsBadge
+                    isFutureGame={day.info.isFutureGame}
+                    gameStart={day.info.gameStart}
+                    rescheduled={day.info.rescheduled}
                     result={result}
                     gameIdGm2={day.info.gameIdGm2}
+                    isFutureGameGm2={day.info.isFutureGameGm2}
+                    gameStartGm2={day.info.gameStartGm2}
+                    rescheduledGm2={day.info.rescheduledGm2}
                     resultGm2={resultGm2}
-                    rescheduled={day.info.rescheduled}
                   />
                 </Link>
+                
               )}
             </div>
           );

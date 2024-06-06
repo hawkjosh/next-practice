@@ -139,9 +139,9 @@ export default function Linescore({
             }}
             className="flex items-center justify-around"
           >
-            <div>{awayTeamRuns}</div>
-            <div>{awayTeamHits}</div>
-            <div>{awayTeamErrors}</div>
+            <div>{awayTeamRuns ? awayTeamRuns : 0}</div>
+            <div>{awayTeamHits ? awayTeamHits : 0}</div>
+            <div>{awayTeamErrors ? awayTeamErrors : 0}</div>
           </div>
           <div
             style={{
@@ -151,9 +151,9 @@ export default function Linescore({
             }}
             className="flex items-center justify-around"
           >
-            <div>{homeTeamRuns}</div>
-            <div>{homeTeamHits}</div>
-            <div>{homeTeamErrors}</div>
+            <div>{homeTeamRuns ? homeTeamRuns : 0}</div>
+            <div>{homeTeamHits ? homeTeamHits : 0}</div>
+            <div>{homeTeamErrors ? homeTeamErrors : 0}</div>
           </div>
         </div>
       </div>

@@ -15,6 +15,8 @@ export const useDate = (dateStr) => {
 
 	const calendarStart = dayjs(dateStr).startOf('month')
 
+	const calendarStartAlt = dayjs(dateStr)
+
 	const calendarEnd = dayjs(dateStr).endOf('month')
 
 	const firstDay = dayjs(dateStr).startOf('month').day()
@@ -27,6 +29,7 @@ export const useDate = (dateStr) => {
 		gameDate,
 		gameStart,
 		calendarStart,
+		calendarStartAlt,
 		calendarEnd,
 		firstDay,
 	}

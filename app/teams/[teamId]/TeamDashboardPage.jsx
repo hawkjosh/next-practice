@@ -2,7 +2,7 @@ import { getMonthScheduleData } from "@/lib/getMonthScheduleData";
 import TeamCalendar from "./components/TeamCalendar";
 
 export default async function TeamCalendarPage({ params }) {
-  const months = ["Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"];
+  const months = ["Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"];
   const teamId = params.teamId;
 
   const data = await Promise.all(
@@ -10,7 +10,7 @@ export default async function TeamCalendarPage({ params }) {
       const { calendarTitle, calendarData, emptyCells } =
         await getMonthScheduleData(teamId, month);
 
-      return {
+        return {
         calendarTitle,
         calendarData,
         emptyCells,
