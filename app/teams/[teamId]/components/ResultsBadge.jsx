@@ -48,16 +48,16 @@ export default function ResultsBadge({
         </span>
         {gameIdGm2 && (
           <>
-          {isFutureGameGm2 && (
-            <div className="absolute bottom-[2%] w-full text-center text-[10px] font-semibold tracking-tighter text-slate-700 md:text-sm xl:text-base">
-              {gameStartGm2}
-            </div>
-          )}
-          {rescheduledGm2 && (
-            <div className="absolute bottom-[2%] w-full bg-[yellow] text-center text-[10px] font-bold tracking-tighter text-rose-500 md:text-sm xl:text-base">
-              Postponed
-            </div>
-          )}
+            {isFutureGameGm2 && (
+              <div className="absolute bottom-[2%] w-full text-center text-[10px] font-semibold tracking-tighter text-slate-700 md:text-sm xl:text-base">
+                {gameStartGm2}
+              </div>
+            )}
+            {rescheduledGm2 && (
+              <div className="absolute bottom-[2%] w-full bg-[yellow] text-center text-[10px] font-bold tracking-tighter text-rose-500 md:text-sm xl:text-base">
+                Postponed
+              </div>
+            )}
             <span className="text-[11px] font-semibold text-slate-500 md:text-sm xl:text-base">
               |
             </span>

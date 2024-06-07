@@ -30,7 +30,14 @@ export default async function TeamPage({ teamId, children }) {
       }}
       className="min-h-screen pb-4 @container/main"
     >
-      <TeamNavbar teamId={teamId} teamName={teamNameDisplay} color1={color1} color2={color2} color3={color3} color4={color4} />
+      <TeamNavbar
+        teamId={teamId}
+        teamName={teamNameDisplay}
+        color1={color1}
+        color2={color2}
+        color3={color3}
+        color4={color4}
+      />
       <div className="flex flex-col items-center max-w-screen-xl gap-2 py-4 mx-auto">
         {children}
       </div>

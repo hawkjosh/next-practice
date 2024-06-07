@@ -14,8 +14,8 @@ export default async function TeamsPage() {
 
   return (
     <div className="min-h-screen bg-[#bababa] py-4">
-      <div className="@container/home mx-auto mb-4 flex max-w-screen-xl flex-col items-center gap-4 md:gap-6 xl:gap-8">
-        <div className="@md/home:w-[85%] @lg/home:grid-cols-4 @3xl/home:w-[90%] @3xl/home:grid-cols-5 @3xl/home:gap-y-10 @5xl/home:w-[85%] @5xl/home:grid-cols-6 mx-auto grid w-[95%] grid-cols-3 place-items-center gap-y-9 pt-6">
+      <div className="mx-auto mb-4 flex max-w-screen-xl flex-col items-center gap-4 @container/home md:gap-6 xl:gap-8">
+        <div className="mx-auto grid w-[95%] grid-cols-3 place-items-center gap-y-9 pt-6 @md/home:w-[85%] @lg/home:grid-cols-4 @3xl/home:w-[90%] @3xl/home:grid-cols-5 @3xl/home:gap-y-10 @5xl/home:w-[85%] @5xl/home:grid-cols-6">
           {teams.map((team, key) => {
             const { id: teamId, clubName: teamName } = team;
             return (

@@ -40,13 +40,16 @@ export default function TeamCalendar({
             const winningTeam = day.info.homeWin
               ? day.info.homeId
               : day.info.awayId;
-            winningTeam === parseInt(teamId)
-              ? (result = "W")
-              : (result = "L");
+            winningTeam === parseInt(teamId) ? (result = "W") : (result = "L");
           }
 
           let resultGm2 = null;
-          if (day.info && day.info.gameIdGm2 && !day.info.isFutureGameGm2 && !day.info.rescheduledGm2) {
+          if (
+            day.info &&
+            day.info.gameIdGm2 &&
+            !day.info.isFutureGameGm2 &&
+            !day.info.rescheduledGm2
+          ) {
             const winningTeamGm2 = day.info.homeWinGm2
               ? day.info.homeId
               : day.info.awayId;
@@ -66,7 +69,9 @@ export default function TeamCalendar({
               {day.info && (
                 <Link
                   href={
-                    day.info.isFutureGame || day.info.rescheduled ? "javascript:void(0)" : `/teams/${teamId}/${gameIds}`
+                    day.info.isFutureGame || day.info.rescheduled
+                      ? "javascript:void(0)"
+                      : `/teams/${teamId}/schedule/${gameIds}`
                   }
                   className="flex items-center justify-center w-full h-full"
                 >
@@ -102,7 +107,6 @@ export default function TeamCalendar({
                     resultGm2={resultGm2}
                   />
                 </Link>
-                
               )}
             </div>
           );

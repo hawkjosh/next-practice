@@ -9,7 +9,7 @@ export default function AppLayout({ children }) {
 
   return (
     <div className="min-h-screen @container/main">
-      {pathname === '/teams' && <AllTeamsNavbar />}
+      {pathname === "/teams" && <AllTeamsNavbar />}
       {children}
     </div>
   );
